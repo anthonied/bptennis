@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BPTennis.MVC", "BPTennis.MVC\BPTennis.MVC\BPTennis.MVC.csproj", "{E5C31DFA-386D-496E-9163-A1A8B771BD4D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BPTennis.MVC", "BPTennis.MVC\BPTennis.MVC.csproj", "{E5C31DFA-386D-496E-9163-A1A8B771BD4D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
