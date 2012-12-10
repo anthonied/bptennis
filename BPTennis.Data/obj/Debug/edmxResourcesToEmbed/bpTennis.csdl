@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="bp_tennisModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="bp_tennisEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="players" EntityType="bp_tennisModel.player" />
+  </EntityContainer>
+  <EntityType Name="player">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="20" Unicode="true" FixedLength="true" />
+    <Property Name="surname" Type="String" MaxLength="30" Unicode="true" FixedLength="true" />
+    <Property Name="gender" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+    <Property Type="String" Name="telephone" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="email" MaxLength="30" FixedLength="true" Unicode="true" />
+  </EntityType>
+</Schema>

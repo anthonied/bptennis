@@ -12,33 +12,28 @@ namespace BPTennis.Tests
     class UnitTests
     {
         private Player _player;
-        private Pool _onePlayerPool;
-        private Court _ourGrassTestCourt;
+        private Pool _onePlayerPool;        
         private IPlayer _testPlayerRepository = new TestPlayerRepository();
+     
+        
         [SetUp]
         public void Given()
         {
             _onePlayerPool = new Pool();
             _player = _getChrisThePlayer();   
             _onePlayerPool.Player.Add(_player);
-            _ourGrassTestCourt = _getCourt();
+            
         }
-
-        [Test]
-        public void CanCreatePlayer()
-        {
-
-            var newPlayer = _player;
-
-            newPlayer.Save();
-
-            Assert.That(_player.Name, Is.EqualTo("Christopher"));
-        }
-
+       
         [Test]
         public void CanCreateCourt()
         {
-            Assert.That(_ourGrassTestCourt.CourtName, Is.EqualTo("A1"));
+            var ourCourt =  new Court()
+            {
+                CourtName = "A1"
+            };
+
+            Assert.That(ourCourt.CourtName, Is.EqualTo("A1"));
         }
 
         [Test]
@@ -52,14 +47,16 @@ namespace BPTennis.Tests
         {
             var availablePlayer = _onePlayerPool.Player.First();
 
-            var availableCourts = new List<Court>();
+            var availableCourts = new List<Court>();            
 
-            availableCourts.Add(_ourGrassTestCourt);
+            availableCourts.Add(new Court()
+            {
+                CourtName = "A1"
+            });
 
             availablePlayer.SendToCourt(availableCourts.First());            
 
             Assert.That(availableCourts.First().Players.First().Name, Is.EqualTo("Christopher"));
-
         }
 
         [Test]
@@ -75,60 +72,79 @@ namespace BPTennis.Tests
         [Test]
         public void CourtIsFullWhenFourPlayersAreOnCourt()
         {
-           _ourGrassTestCourt.Players = new List<Player>{
-                new Player(_testPlayerRepository) { Id = 29, Name = "Christopher"}, 
-                new Player(_testPlayerRepository) { Id = 13, Name = "Drilene" }, 
-                new Player(_testPlayerRepository) { Id = 17, Name = "Phillip" },
-                new Player(_testPlayerRepository) { Id = 12, Name = "Johan" }               
+            var ourCourt = new Court()
+            {
+                CourtName = "A1"
+            };
+
+            ourCourt.Players = new List<Player>{
+                new Player() { Id = 29, Name = "Christopher"}, 
+                new Player() { Id = 13, Name = "Drilene" }, 
+                new Player() { Id = 17, Name = "Phillip" },
+                new Player() { Id = 12, Name = "Johan" }               
            };
 
-            Assert.That(_ourGrassTestCourt.Full, Is.True);
+            Assert.That(ourCourt.Full, Is.True);
         }
 
         [Test]
         public void CourtIsNotFullWhenThreePlayersAreOnCourt()
         {
-            _ourGrassTestCourt.Players = new List<Player>{
-                new Player(_testPlayerRepository) {Id = 29, Name = "Christopher"},
-                new Player(_testPlayerRepository) {Id = 13, Name = "Drilene"},
-                new Player(_testPlayerRepository) {Id = 17, Name = "Phillip"}
+            var ourCourt = new Court
+            {
+                CourtName = "A1"
             };
 
-            Assert.That(_ourGrassTestCourt.Full, Is.False);
+            ourCourt.Players = new List<Player>{
+                new Player() {Id = 29, Name = "Christopher"},
+                new Player() {Id = 13, Name = "Drilene"},
+                new Player() {Id = 17, Name = "Phillip"}
+            };
+
+            Assert.That(ourCourt.Full, Is.False);
 
         }
 
         [Test]
-        public void CantSendPlayerToCourtWhenCourtIsFull()
+        public void CanNotSendPlayerToCourtWhenCourtIsFull()
         {
             var availablePlayer = _onePlayerPool.Player.First();
 
-            _ourGrassTestCourt.Players = new List<Player>{
-                new Player(_testPlayerRepository) {Id = 29, Name = "Christopher"},
-                new Player(_testPlayerRepository) {Id = 13, Name = "Drilene"},
-                new Player(_testPlayerRepository) {Id = 17, Name = "Phillip"},
-                new Player(_testPlayerRepository) {Id = 12, Name = "Johan"}
+            var ourCourt = new Court
+            {
+                CourtName = "A1"
             };
 
-            availablePlayer.SendToCourt(_ourGrassTestCourt);
+            ourCourt.Players = new List<Player>{
+                new Player() {Id = 29, Name = "Christopher"},
+                new Player() {Id = 13, Name = "Drilene"},
+                new Player() {Id = 17, Name = "Phillip"},
+                new Player() {Id = 12, Name = "Johan"}
+            };
 
-            Assert.That(_ourGrassTestCourt.Players.Count, Is.EqualTo(4));
+            availablePlayer.SendToCourt(ourCourt);
+
+            Assert.That(ourCourt.Players.Count, Is.EqualTo(4));
         }
 
         [Test]
-        public void PlayerFinishedOnCourtSendBackToPool()
+        public void PlayerFinishedOnCourtIsNotInTheCourtPlayerListAnyMore()
         {
-            var courtPlayer = new Player(_testPlayerRepository) { Id = 29, Name = "Christopher" };
+            var courtPlayer = new Player() { Id = 29, Name = "Christopher" };
+            var ourCourt = new Court
+            {
+                CourtName = "A1"
+            };
 
             courtPlayer.AddToPool(_onePlayerPool);
 
-            Assert.That(_ourGrassTestCourt.Players.Find(player => player.Id == courtPlayer.Id), Is.Null);
+            Assert.That(ourCourt.Players.Find(player => player.Id == courtPlayer.Id), Is.Null);
         }
 
         [Test]
         public void PlayerAttendedTheDay()
         {
-            var attendingPlayer = new Player(_testPlayerRepository) { Id = 29, Name = "Christopher" };
+            var attendingPlayer = new Player() { Id = 29, Name = "Christopher" };
 
             attendingPlayer.SetToAvailableToPlay();
 
@@ -138,7 +154,7 @@ namespace BPTennis.Tests
         [Test]
         public void PlayerCanGoHome()
         {
-            var tiredPlayer = new Player(_testPlayerRepository) { Id = 7, Name = "Anthonie" };
+            var tiredPlayer = new Player() { Id = 7, Name = "Anthonie" };
             tiredPlayer.SetToAvailableToPlay();
 
             tiredPlayer.SetToNotAvailableToPlay();
@@ -149,7 +165,7 @@ namespace BPTennis.Tests
         [Test]
         public void AbsentPlayerCannotBeAddedToPool()
         {
-            var absentPlayer = new Player(_testPlayerRepository) { Id = 7, Name = "Anthonie" };
+            var absentPlayer = new Player() { Id = 7, Name = "Anthonie" };
 
             absentPlayer.SetToNotAvailableToPlay();
 
@@ -161,28 +177,23 @@ namespace BPTennis.Tests
         [Test]
         public void PlayerFinishedMustBeRemovedFromCourt()
         {
-            var courtPlayer = new Player(_testPlayerRepository) { Id = 13, Name = "Drilene" };
-
-            courtPlayer.SendToCourt(_ourGrassTestCourt);
-
-            _ourGrassTestCourt.FinishGame();
-            
-            Assert.That(_ourGrassTestCourt.Players.Find(player => player.Id == courtPlayer.Id), Is.Null);
-        }
-
-        private Court _getCourt()
-        {
-            var court = new Court()
+            var courtPlayer = new Player() { Id = 13, Name = "Drilene" };
+            var ourCourt = new Court
             {
                 CourtName = "A1"
             };
-            return court;
+            courtPlayer.SendToCourt(ourCourt);
+
+            ourCourt.FinishGame();
+
+            Assert.That(ourCourt.Players.Find(player => player.Id == courtPlayer.Id), Is.Null);
         }
 
+       
         private Player _getChrisThePlayer()
         {
           
-            var player = new Player(_testPlayerRepository)
+            var player = new Player()
             {
                 Id = 29,
                 Name = "Christopher",

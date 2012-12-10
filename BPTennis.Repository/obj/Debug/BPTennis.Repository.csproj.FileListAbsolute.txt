@@ -1,0 +1,12 @@
+C:\Development\Projects\BPTennis\BPTennis.Repository\bin\Debug\BPTennis.Repository.dll.config
+C:\Development\Projects\BPTennis\BPTennis.Repository\bin\Debug\BPTennis.Repository.dll
+C:\Development\Projects\BPTennis\BPTennis.Repository\bin\Debug\BPTennis.Repository.pdb
+C:\Development\Projects\BPTennis\BPTennis.Repository\bin\Debug\BPTennis.Data.dll
+C:\Development\Projects\BPTennis\BPTennis.Repository\bin\Debug\BPTennis.Domain.dll
+C:\Development\Projects\BPTennis\BPTennis.Repository\bin\Debug\EntityFramework.dll
+C:\Development\Projects\BPTennis\BPTennis.Repository\bin\Debug\BPTennis.Data.pdb
+C:\Development\Projects\BPTennis\BPTennis.Repository\bin\Debug\BPTennis.Domain.pdb
+C:\Development\Projects\BPTennis\BPTennis.Repository\bin\Debug\EntityFramework.xml
+C:\Development\Projects\BPTennis\BPTennis.Repository\obj\Debug\BPTennis.Repository.csprojResolveAssemblyReference.cache
+C:\Development\Projects\BPTennis\BPTennis.Repository\obj\Debug\BPTennis.Repository.dll
+C:\Development\Projects\BPTennis\BPTennis.Repository\obj\Debug\BPTennis.Repository.pdb

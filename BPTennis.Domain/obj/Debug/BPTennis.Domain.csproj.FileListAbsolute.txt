@@ -1,0 +1,12 @@
+c:\Users\Chris\Documents\Visual Studio 2012\Projects\BPTennis\BPTennis.Domain\bin\Debug\BPTennis.Domain.dll
+c:\Users\Chris\Documents\Visual Studio 2012\Projects\BPTennis\BPTennis.Domain\bin\Debug\BPTennis.Domain.pdb
+c:\Users\Chris\Documents\Visual Studio 2012\Projects\BPTennis\BPTennis.Domain\obj\Debug\BPTennis.Domain.dll
+c:\Users\Chris\Documents\Visual Studio 2012\Projects\BPTennis\BPTennis.Domain\obj\Debug\BPTennis.Domain.pdb
+C:\Users\Chris\documents\visual studio 2012\Projects\BPTennis\BPTennis.Domain\bin\Debug\BPTennis.Domain.dll.config
+C:\Users\Chris\documents\visual studio 2012\Projects\BPTennis\BPTennis.Domain\obj\Debug\BPTennis.Domain.csprojResolveAssemblyReference.cache
+C:\Development\Projects\BPTennis\BPTennis.Domain\bin\Debug\BPTennis.Domain.dll.config
+C:\Development\Projects\BPTennis\BPTennis.Domain\bin\Debug\BPTennis.Domain.dll
+C:\Development\Projects\BPTennis\BPTennis.Domain\bin\Debug\BPTennis.Domain.pdb
+C:\Development\Projects\BPTennis\BPTennis.Domain\obj\Debug\BPTennis.Domain.csprojResolveAssemblyReference.cache
+C:\Development\Projects\BPTennis\BPTennis.Domain\obj\Debug\BPTennis.Domain.dll
+C:\Development\Projects\BPTennis\BPTennis.Domain\obj\Debug\BPTennis.Domain.pdb

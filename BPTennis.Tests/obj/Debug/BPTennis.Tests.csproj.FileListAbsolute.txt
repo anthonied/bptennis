@@ -7,3 +7,12 @@ c:\Users\Chris\Documents\Visual Studio 2012\Projects\BPTennis\BPTennis.Tests\obj
 c:\Users\Chris\Documents\Visual Studio 2012\Projects\BPTennis\BPTennis.Tests\obj\Debug\BPTennis.Tests.pdb
 c:\Users\Chris\Documents\Visual Studio 2012\Projects\BPTennis\BPTennis.Tests\bin\Debug\BPTennis.Domain.dll
 c:\Users\Chris\Documents\Visual Studio 2012\Projects\BPTennis\BPTennis.Tests\bin\Debug\BPTennis.Domain.pdb
+C:\Development\Projects\BPTennis\BPTennis.Tests\obj\Debug\BPTennis.Tests.csprojResolveAssemblyReference.cache
+C:\Development\Projects\BPTennis\BPTennis.Tests\obj\Debug\BPTennis.Tests.dll
+C:\Development\Projects\BPTennis\BPTennis.Tests\bin\Debug\BPTennis.Tests.dll
+C:\Development\Projects\BPTennis\BPTennis.Tests\bin\Debug\BPTennis.Tests.pdb
+C:\Development\Projects\BPTennis\BPTennis.Tests\bin\Debug\BPTennis.Domain.dll
+C:\Development\Projects\BPTennis\BPTennis.Tests\bin\Debug\nunit.framework.dll
+C:\Development\Projects\BPTennis\BPTennis.Tests\bin\Debug\BPTennis.Domain.pdb
+C:\Development\Projects\BPTennis\BPTennis.Tests\bin\Debug\nunit.framework.xml
+C:\Development\Projects\BPTennis\BPTennis.Tests\obj\Debug\BPTennis.Tests.pdb

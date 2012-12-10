@@ -551,17 +551,14 @@
         </member>
         <member name="T:NUnit.Framework.SetUpAttribute">
             <summary>
-            SetUpAttribute is used in a TestFixture to identify a method
-            that is called immediately before each test is run. It is 
-            also used in a SetUpFixture to identify the method that is
-            called once, before any of the subordinate tests are run.
+            Attribute used to mark a class that contains one-time SetUp 
+            and/or TearDown methods that apply to all the tests in a
+            namespace or an assembly.
             </summary>
         </member>
         <member name="T:NUnit.Framework.SetUpFixtureAttribute">
             <summary>
-            Attribute used to mark a class that contains one-time SetUp 
-            and/or TearDown methods that apply to all the tests in a
-            namespace or an assembly.
+            SetUpFixtureAttribute is used to identify a SetUpFixture
             </summary>
         </member>
         <member name="T:NUnit.Framework.SuiteAttribute">
@@ -572,11 +569,9 @@
         </member>
         <member name="T:NUnit.Framework.TearDownAttribute">
             <summary>
-            Attribute used in a TestFixture to identify a method that is 
-            called immediately after each test is run. It is also used
-            in a SetUpFixture to identify the method that is called once,
-            after all subordinate tests have run. In either case, the method 
-            is guaranteed to be called, even if an exception is thrown.
+            Attribute used to identify a method that is called 
+            immediately after each test is run. The method is 
+            guaranteed to be called, even if an exception is thrown.
             </summary>
         </member>
         <member name="T:NUnit.Framework.TestActionAttribute">
@@ -745,14 +740,13 @@
         </member>
         <member name="P:NUnit.Framework.TestCaseAttribute.Result">
             <summary>
-            Gets or sets the expected result. Use
-            ExpectedResult by preference.
+            Gets or sets the expected result.
             </summary>
             <value>The result.</value>
         </member>
         <member name="P:NUnit.Framework.TestCaseAttribute.ExpectedResult">
             <summary>
-            Gets or sets the expected result.
+            Gets the expected result.
             </summary>
             <value>The result.</value>
         </member>
@@ -843,20 +837,14 @@
         </member>
         <member name="M:NUnit.Framework.TestCaseSourceAttribute.#ctor(System.String)">
             <summary>
-            Construct with the name of the data source, which must
-            be a property, field or method of the test class itself.
+            Construct with the name of the factory - for use with languages
+            that don't support params arrays.
             </summary>
             <param name="sourceName">An array of the names of the factories that will provide data</param>
         </member>
-        <member name="M:NUnit.Framework.TestCaseSourceAttribute.#ctor(System.Type)">
-            <summary>
-            Construct with a Type, which must implement IEnumerable
-            </summary>
-            <param name="sourceType">The Type that will provide data</param>
-        </member>
         <member name="M:NUnit.Framework.TestCaseSourceAttribute.#ctor(System.Type,System.String)">
             <summary>
-            Construct with a Type and name.
+            Construct with a Type and name - for use with languages
             that don't support params arrays.
             </summary>
             <param name="sourceType">The Type that will provide data</param>
@@ -4208,7 +4196,7 @@
             Compares two objects for equality within a tolerance.
             </summary>
         </member>
-        <member name="M:NUnit.Framework.Constraints.NUnitEqualityComparer.ArraysEqual(System.Array,System.Array,NUnit.Framework.Constraints.NUnitEqualityComparer.EnumerableRecursionHelper,NUnit.Framework.Constraints.Tolerance@)">
+        <member name="M:NUnit.Framework.Constraints.NUnitEqualityComparer.ArraysEqual(System.Array,System.Array,NUnit.Framework.Constraints.Tolerance@)">
             <summary>
             Helper method to compare two arrays
             </summary>
@@ -4557,7 +4545,7 @@
         </member>
         <member name="M:NUnit.Framework.Constraints.NoItemConstraint.#ctor(NUnit.Framework.Constraints.Constraint)">
             <summary>
-            Construct a NoItemConstraint on top of an existing constraint
+            Construct a SomeItemsConstraint on top of an existing constraint
             </summary>
             <param name="itemConstraint"></param>
         </member>
@@ -4739,48 +4727,6 @@
         <member name="M:NUnit.Framework.Constraints.ResolvableConstraintExpression.NUnit#Framework#Constraints#IResolveConstraint#Resolve">
             <summary>
             Resolve the current expression to a Constraint
-            </summary>
-        </member>
-        <member name="M:NUnit.Framework.Constraints.ResolvableConstraintExpression.op_BitwiseAnd(NUnit.Framework.Constraints.ResolvableConstraintExpression,NUnit.Framework.Constraints.ResolvableConstraintExpression)">
-            <summary>
-            This operator creates a constraint that is satisfied only if both 
-            argument constraints are satisfied.
-            </summary>
-        </member>
-        <member name="M:NUnit.Framework.Constraints.ResolvableConstraintExpression.op_BitwiseAnd(NUnit.Framework.Constraints.Constraint,NUnit.Framework.Constraints.ResolvableConstraintExpression)">
-            <summary>
-            This operator creates a constraint that is satisfied only if both 
-            argument constraints are satisfied.
-            </summary>
-        </member>
-        <member name="M:NUnit.Framework.Constraints.ResolvableConstraintExpression.op_BitwiseAnd(NUnit.Framework.Constraints.ResolvableConstraintExpression,NUnit.Framework.Constraints.Constraint)">
-            <summary>
-            This operator creates a constraint that is satisfied only if both 
-            argument constraints are satisfied.
-            </summary>
-        </member>
-        <member name="M:NUnit.Framework.Constraints.ResolvableConstraintExpression.op_BitwiseOr(NUnit.Framework.Constraints.ResolvableConstraintExpression,NUnit.Framework.Constraints.ResolvableConstraintExpression)">
-            <summary>
-            This operator creates a constraint that is satisfied if either 
-            of the argument constraints is satisfied.
-            </summary>
-        </member>
-        <member name="M:NUnit.Framework.Constraints.ResolvableConstraintExpression.op_BitwiseOr(NUnit.Framework.Constraints.ResolvableConstraintExpression,NUnit.Framework.Constraints.Constraint)">
-            <summary>
-            This operator creates a constraint that is satisfied if either 
-            of the argument constraints is satisfied.
-            </summary>
-        </member>
-        <member name="M:NUnit.Framework.Constraints.ResolvableConstraintExpression.op_BitwiseOr(NUnit.Framework.Constraints.Constraint,NUnit.Framework.Constraints.ResolvableConstraintExpression)">
-            <summary>
-            This operator creates a constraint that is satisfied if either 
-            of the argument constraints is satisfied.
-            </summary>
-        </member>
-        <member name="M:NUnit.Framework.Constraints.ResolvableConstraintExpression.op_LogicalNot(NUnit.Framework.Constraints.ResolvableConstraintExpression)">
-            <summary>
-            This operator creates a constraint that is satisfied if the 
-            argument constraint is not satisfied.
             </summary>
         </member>
         <member name="P:NUnit.Framework.Constraints.ResolvableConstraintExpression.And">

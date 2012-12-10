@@ -3,6 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BPTennis.MVC", "BPTennis.MVC\BPTennis.MVC.csproj", "{E5C31DFA-386D-496E-9163-A1A8B771BD4D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BPTennis.Tests", "BPTennis.Tests\BPTennis.Tests.csproj", "{EBF63E85-0CD3-4B16-A2C4-B318451A948A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BPTennis.Domain", "BPTennis.Domain\BPTennis.Domain.csproj", "{C45B9D9A-3E88-419B-A9A7-012E4AAFB692}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BPTennis.Repository", "BPTennis.Repository\BPTennis.Repository.csproj", "{C411A886-662E-4E76-B881-1757A128FAFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BPTennis.Data", "BPTennis.Data\BPTennis.Data.csproj", "{4F936CCE-EB28-46C8-A81D-3D6C0B4AEEBA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +21,22 @@ Global
 		{E5C31DFA-386D-496E-9163-A1A8B771BD4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5C31DFA-386D-496E-9163-A1A8B771BD4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5C31DFA-386D-496E-9163-A1A8B771BD4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBF63E85-0CD3-4B16-A2C4-B318451A948A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBF63E85-0CD3-4B16-A2C4-B318451A948A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBF63E85-0CD3-4B16-A2C4-B318451A948A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBF63E85-0CD3-4B16-A2C4-B318451A948A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C45B9D9A-3E88-419B-A9A7-012E4AAFB692}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C45B9D9A-3E88-419B-A9A7-012E4AAFB692}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C45B9D9A-3E88-419B-A9A7-012E4AAFB692}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C45B9D9A-3E88-419B-A9A7-012E4AAFB692}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C411A886-662E-4E76-B881-1757A128FAFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C411A886-662E-4E76-B881-1757A128FAFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C411A886-662E-4E76-B881-1757A128FAFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C411A886-662E-4E76-B881-1757A128FAFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F936CCE-EB28-46C8-A81D-3D6C0B4AEEBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F936CCE-EB28-46C8-A81D-3D6C0B4AEEBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F936CCE-EB28-46C8-A81D-3D6C0B4AEEBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F936CCE-EB28-46C8-A81D-3D6C0B4AEEBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
