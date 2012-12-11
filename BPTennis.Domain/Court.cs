@@ -7,6 +7,7 @@ namespace BPTennis.Domain
 {
     public class Court
     {
+        public int Id { get; set; }
         public string CourtName { get; set; }
         public List<Player> Players { get; set; }
         public bool Full

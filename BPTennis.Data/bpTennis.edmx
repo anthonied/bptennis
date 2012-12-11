@@ -6,8 +6,16 @@
     <edmx:StorageModels>
     <Schema Namespace="bp_tennisModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="bp_tennisModelStoreContainer">
+          <EntitySet Name="court" EntityType="bp_tennisModel.Store.court" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="player" EntityType="bp_tennisModel.Store.player" store:Type="Tables" Schema="dbo" />
         </EntityContainer>
+        <EntityType Name="court">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="player">
           <Key>
             <PropertyRef Name="id" />
@@ -26,6 +34,7 @@
       <Schema Namespace="bp_tennisModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="bp_tennisEntities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="players" EntityType="bp_tennisModel.player" />
+          <EntitySet Name="courts" EntityType="bp_tennisModel.court" />
         </EntityContainer>
         <EntityType Name="player">
           <Key>
@@ -38,6 +47,13 @@
           <Property Type="String" Name="telephone" MaxLength="15" FixedLength="true" Unicode="true" />
           <Property Type="String" Name="email" MaxLength="30" FixedLength="true" Unicode="true" />
           <Property Type="String" Name="status" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="court">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="name" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -55,6 +71,14 @@
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="surname" ColumnName="surname" />
                 <ScalarProperty Name="gender" ColumnName="gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="courts">
+            <EntityTypeMapping TypeName="bp_tennisModel.court">
+              <MappingFragment StoreEntitySet="court">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

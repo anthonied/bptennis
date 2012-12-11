@@ -8,11 +8,10 @@ namespace BPTennis.MVC.Models
 {
     public class CourtModel
     {
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "Court Name is required")]
         [Display(Name = "Name")]
         public string CourtName { get; set; }
-
-        [Display(Name = "Players")]
-        public string Players { get; set; }
     }
 }

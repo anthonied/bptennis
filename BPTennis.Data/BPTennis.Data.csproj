@@ -61,6 +61,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>bpTennis.edmx</DependentUpon>
     </Compile>
+    <Compile Include="court.cs">
+      <DependentUpon>bpTennis.tt</DependentUpon>
+    </Compile>
     <Compile Include="player.cs">
       <DependentUpon>bpTennis.tt</DependentUpon>
     </Compile>

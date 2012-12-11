@@ -26,5 +26,6 @@ namespace BPTennis.Data
         }
     
         public DbSet<player> players { get; set; }
+        public DbSet<court> courts { get; set; }
     }
 }

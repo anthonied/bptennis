@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BPTennis.Domain;
+using BPTennis.MVC.Models;
+using BPTennis.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,7 +16,15 @@ namespace BPTennis.MVC.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var courts = new List<CourtModel>();
+
+            var courtRepository = new CourtRepository();
+
+            var domainCourts = courtRepository.GetAllCourts();
+
+            domainCourts.ForEach(domainCourt => courts.Add(new CourtModel { Id = domainCourt.Id, CourtName = domainCourt.CourtName }));
+
+            return View(courts);
         }
 
         //
@@ -29,18 +40,21 @@ namespace BPTennis.MVC.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            var court = new CourtModel();            
+
+            return View(court);
         }
 
         //
         // POST: /Court/Create
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(CourtModel newModelCourt)
         {
             try
             {
-                // TODO: Add insert logic here
+                var courtRepository = new CourtRepository();
+                courtRepository.CreateCourt(new Court { CourtName = newModelCourt.CourtName });
 
                 return RedirectToAction("Index");
             }
@@ -55,18 +69,30 @@ namespace BPTennis.MVC.Controllers
 
         public ActionResult Edit(int id)
         {
-            return View();
+            var courtRepository = new CourtRepository();
+
+            var domainCourt = courtRepository.GetCourtById(id);
+
+            var courtModel = new CourtModel()
+            {
+                Id = domainCourt.Id,
+                CourtName = domainCourt.CourtName
+            };
+
+            return View(courtModel);
         }
 
         //
         // POST: /Court/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Court court)
         {
             try
             {
-                // TODO: Add update logic here
+                var courtRepository = new CourtRepository();
+
+                courtRepository.UpdateCourtDetails(court);
 
                 return RedirectToAction("Index");
             }
@@ -81,18 +107,28 @@ namespace BPTennis.MVC.Controllers
 
         public ActionResult Delete(int id)
         {
-            return View();
+            var courtRepository = new CourtRepository();
+            var domainCourt = courtRepository.GetCourtById(id);
+
+            var courtModel = new CourtModel()
+            {
+                Id = domainCourt.Id,
+                CourtName = domainCourt.CourtName
+            };
+
+            return View(courtModel);
         }
 
         //
         // POST: /Court/Delete/5
 
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Court court)
         {
             try
             {
-                // TODO: Add delete logic here
+                var courtRepository = new CourtRepository();
+                courtRepository.RemoveCourt(id);
 
                 return RedirectToAction("Index");
             }

@@ -5,7 +5,8 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="ccbb7b5e1e1e4582807dbd4d670b2e75" Name="Diagram1">
-        <EntityTypeShape EntityType="bp_tennisModel.player" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bp_tennisModel.player" Width="1.5" PointX="1.25" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="bp_tennisModel.court" Width="1.5" PointX="7" PointY="1.125" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

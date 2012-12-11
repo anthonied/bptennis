@@ -301,6 +301,9 @@
     <Content Include="Views\Player\Inactive.cshtml" />
     <Content Include="Views\Player\Reinstate.cshtml" />
     <Content Include="Views\Court\Index.cshtml" />
+    <Content Include="Views\Court\Create.cshtml" />
+    <Content Include="Views\Court\Edit.cshtml" />
+    <Content Include="Views\Court\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
