@@ -25,7 +25,7 @@ namespace BPTennis.Domain
         public void AddToPool(Pool pool)
         {
             if (AvailableToPlay)
-            pool.Player.Add(this);
+            pool.Players.Add(this);
         }
         public void SendToCourt(Court court)
         {
@@ -34,7 +34,7 @@ namespace BPTennis.Domain
         }
         public void RemoveFromPool(Pool pool)
         {
-            pool.Player.Remove(this);
+            pool.Players.Remove(this);
         }
 
         public void SetToNotAvailableToPlay()

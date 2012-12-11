@@ -1,0 +1,12 @@
+﻿@model BPTennis.MVC.Models.SessionModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@if(Model.HasPreviousPage){
+  
+    @Html.RouteLink("<<<", "Players", new { page (Model.PageIndex -1) })
+}

@@ -8,11 +8,17 @@ namespace BPTennis.Domain
 {
     public class Pool
     {
-        public List<Player> Player { get; set; }
+        public List<Player> Players { get; set; }
 
+        
         public Pool()
         {
-            Player = new List<Player>();
+            Players = new List<Player>();
+        }
+
+        public void AddPlayer(Player player)
+        {
+            Players.Add(player);
         }
     }
 }

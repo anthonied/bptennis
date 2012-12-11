@@ -21,7 +21,7 @@ namespace BPTennis.Tests
         {
             _onePlayerPool = new Pool();
             _player = _getChrisThePlayer();   
-            _onePlayerPool.Player.Add(_player);
+            _onePlayerPool.Players.Add(_player);
             
         }
        
@@ -39,13 +39,17 @@ namespace BPTennis.Tests
         [Test]
         public void CanSendPlayersToAvailablePool()
         {
-            Assert.That(_onePlayerPool.Player.First().Name, Is.EqualTo("Christopher"));
+            var playerPool = new Pool();
+
+            playerPool.AddPlayer(new Player { Name = "Christopher" });
+
+            Assert.That(playerPool.Players.First().Name, Is.EqualTo("Christopher"));
         }
 
         [Test]
         public void CanSendAvailablePoolPlayerToAvailaleCourt()
         {
-            var availablePlayer = _onePlayerPool.Player.First();
+            var availablePlayer = _onePlayerPool.Players.First();
 
             var availableCourts = new List<Court>();            
 
@@ -62,11 +66,11 @@ namespace BPTennis.Tests
         [Test]
         public void CanRemovePlayerFromPool()
         {
-            var availablePlayer = _onePlayerPool.Player.First();
+            var availablePlayer = _onePlayerPool.Players.First();
 
             availablePlayer.RemoveFromPool(_onePlayerPool);
 
-            Assert.That(_onePlayerPool.Player.Find(player => player.Id == availablePlayer.Id), Is.Null);
+            Assert.That(_onePlayerPool.Players.Find(player => player.Id == availablePlayer.Id), Is.Null);
         }
 
         [Test]
@@ -108,7 +112,7 @@ namespace BPTennis.Tests
         [Test]
         public void CanNotSendPlayerToCourtWhenCourtIsFull()
         {
-            var availablePlayer = _onePlayerPool.Player.First();
+            var availablePlayer = _onePlayerPool.Players.First();
 
             var ourCourt = new Court
             {
@@ -171,7 +175,7 @@ namespace BPTennis.Tests
 
             absentPlayer.AddToPool(_onePlayerPool);
 
-            Assert.That(_onePlayerPool.Player.Count, Is.EqualTo(1));                      
+            Assert.That(_onePlayerPool.Players.Count, Is.EqualTo(1));                      
         }
 
         [Test]
