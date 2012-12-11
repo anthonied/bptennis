@@ -149,5 +149,60 @@ namespace BPTennis.MVC.Controllers
                 return View();
             }
         }
+
+        public ActionResult Inactive()
+        {
+            var inactivePlayers = new List<PlayerModel>();
+
+            var playerRepository = new PlayerRepository();
+
+            var domainPlayers = playerRepository.GetAllInactivePlayers();
+
+            domainPlayers.ForEach(domainPlayer => inactivePlayers.Add(new PlayerModel
+                {
+                    Id = domainPlayer.Id,
+                    Name = domainPlayer.Name,
+                    Surname = domainPlayer.Surname,
+                    Gender = (Gender)Enum.Parse(typeof(Gender), domainPlayer.Gender),
+                    Telephone = domainPlayer.Telephone,
+                    Email = domainPlayer.Email
+                }));
+
+            return View(inactivePlayers);
+        }
+
+        public ActionResult Reinstate(int id)
+        {
+            var playerRepository = new PlayerRepository();
+            var domainPlayer = playerRepository.GetPlayerById(id);
+
+            var playerModel = new PlayerModel()
+            {
+                Id = domainPlayer.Id,
+                Name = domainPlayer.Name,
+                Surname = domainPlayer.Surname,
+                Gender = (Gender)Enum.Parse(typeof(Gender), domainPlayer.Gender),
+                Telephone = domainPlayer.Telephone,
+                Email = domainPlayer.Email
+            };
+
+            return View(playerModel);
+        }
+
+        [HttpPost]
+        public ActionResult Reinstate(int id, Player player)
+        {
+            try
+            {
+                var playerRepository = new PlayerRepository();
+                playerRepository.ChangeReinstatePlayer(id);
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
     }
 }

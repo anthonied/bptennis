@@ -91,7 +91,37 @@ namespace BPTennis.Repository
                                 where p.id == id
                                 select p).FirstOrDefault();
 
-                dbPlayer.status = "Deleted";
+                dbPlayer.status = "Inactive";
+                model.SaveChanges();
+            }
+        }
+        public List<Player> GetAllInactivePlayers()
+        {
+            using (var model = new bp_tennisEntities())
+            {
+                var inactivePlayers = (from p in model.players
+                                      where p.status == "Inactive"
+                                      select new Player()
+                                      {
+                                          Id = p.id,
+                                          Name = p.name,
+                                          Surname = p.surname,
+                                          Gender = p.gender,
+                                          Telephone = p.telephone,
+                                          Email = p.email
+                                      }).ToList<Player>();
+                return inactivePlayers;
+            }
+        }
+        public void ChangeReinstatePlayer(int id)
+        {
+            using (var model = new bp_tennisEntities())
+            {
+                var dbPlayer = (from p in model.players
+                                where p.id == id
+                                select p).FirstOrDefault();
+
+                dbPlayer.status = "Active";
                 model.SaveChanges();
             }
         }

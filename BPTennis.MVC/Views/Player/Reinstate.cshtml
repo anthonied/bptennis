@@ -1,12 +1,12 @@
 ﻿@model BPTennis.MVC.Models.PlayerModel
 
 @{
-    ViewBag.Title = "Change Status";
+    ViewBag.Title = "Reinstate";
 }
 
-<h2>Delete</h2>
+<h2>Reinstate</h2>
 
-<h3>Are you sure you want to make this player inactive?</h3>
+<h3>Are you sure you want to reinstate this player?</h3>
 <fieldset>
     <legend>PlayerModel</legend>
 
@@ -40,7 +40,7 @@
 </fieldset>
 @using (Html.BeginForm()) {
     <p>
-        <input type="submit" value="Delete" /> |
+        <input type="submit" value="Reinstate" /> |
         @Html.ActionLink("Back to List", "Index")
     </p>
 }
