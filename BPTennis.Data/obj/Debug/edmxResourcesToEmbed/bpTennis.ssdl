@@ -13,5 +13,6 @@
     <Property Name="gender" Type="nchar" MaxLength="10" />
     <Property Name="telephone" Type="nchar" MaxLength="15" />
     <Property Name="email" Type="nchar" MaxLength="30" />
+    <Property Name="status" Type="nchar" MaxLength="10" />
   </EntityType>
 </Schema>

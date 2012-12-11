@@ -13,5 +13,6 @@
     <Property Name="gender" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
     <Property Type="String" Name="telephone" MaxLength="15" FixedLength="true" Unicode="true" />
     <Property Type="String" Name="email" MaxLength="30" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="status" MaxLength="10" FixedLength="true" Unicode="true" />
   </EntityType>
 </Schema>

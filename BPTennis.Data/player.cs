@@ -20,5 +20,6 @@ namespace BPTennis.Data
         public string gender { get; set; }
         public string telephone { get; set; }
         public string email { get; set; }
+        public string status { get; set; }
     }
 }

@@ -4,6 +4,7 @@
     <EntitySetMapping Name="players">
       <EntityTypeMapping TypeName="bp_tennisModel.player">
         <MappingFragment StoreEntitySet="player">
+          <ScalarProperty Name="status" ColumnName="status" />
           <ScalarProperty Name="email" ColumnName="email" />
           <ScalarProperty Name="telephone" ColumnName="telephone" />
           <ScalarProperty Name="id" ColumnName="id" />

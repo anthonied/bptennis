@@ -148,7 +148,7 @@ namespace BPTennis.Tests
 
             attendingPlayer.SetToAvailableToPlay();
 
-            Assert.That(attendingPlayer.IsAvailableToPlay, Is.True);
+            Assert.That(attendingPlayer.AvailableToPlay, Is.True);
         }
 
         [Test]
@@ -159,7 +159,7 @@ namespace BPTennis.Tests
 
             tiredPlayer.SetToNotAvailableToPlay();
 
-            Assert.That(tiredPlayer.IsAvailableToPlay, Is.False);
+            Assert.That(tiredPlayer.AvailableToPlay, Is.False);
         }
 
         [Test]

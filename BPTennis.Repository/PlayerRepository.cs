@@ -20,7 +20,8 @@ namespace BPTennis.Repository
                     surname = newPlayer.Surname,
                     gender = newPlayer.Gender,
                     telephone = newPlayer.Telephone,
-                    email = newPlayer.Email
+                    email = newPlayer.Email,
+                    status = newPlayer.Status
                 };
 
                 model.players.Add(dbPlayer);
@@ -33,6 +34,7 @@ namespace BPTennis.Repository
             using (var model = new bp_tennisEntities())
             {
                 var players = (from p in model.players
+                               where p.status == "Active"
                               select new Player
                               {
                                   Id = p.id,
@@ -78,6 +80,18 @@ namespace BPTennis.Repository
                 dbPlayer.telephone = player.Telephone;
                 dbPlayer.email = player.Email;
 
+                model.SaveChanges();
+            }
+        }
+        public void ChangePlayerStatus(int id)
+        {
+            using (var model = new bp_tennisEntities())
+            {
+                var dbPlayer = (from p in model.players
+                                where p.id == id
+                                select p).FirstOrDefault();
+
+                dbPlayer.status = "Deleted";
                 model.SaveChanges();
             }
         }

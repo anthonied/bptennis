@@ -22,10 +22,12 @@ namespace BPTennis.MVC.Controllers
 
             var domainPlayers = playerRepository.GetAllPlayers();
 
-            domainPlayers.ForEach(domainPlayer => players.Add(new PlayerModel {Id = domainPlayer.Id, 
+            domainPlayers.ForEach(domainPlayer => players.Add(new PlayerModel { Id = domainPlayer.Id,
                     Name = domainPlayer.Name,
                     Surname = domainPlayer.Surname,
-                    Gender = (Gender)Enum.Parse(typeof(Gender),domainPlayer.Gender), Telephone = domainPlayer.Telephone, Email = domainPlayer.Email}));
+                    Gender = (Gender)Enum.Parse(typeof(Gender), domainPlayer.Gender),
+                    Telephone = domainPlayer.Telephone,
+                    Email = domainPlayer.Email }));
 
             return View(players);
         }
@@ -58,7 +60,7 @@ namespace BPTennis.MVC.Controllers
             {
                 var playerRepository = new PlayerRepository();
                 playerRepository.CreatePlayer(new Player { Name = newModelPlayer.Name, Surname = newModelPlayer.Surname, Gender = newModelPlayer.Gender.ToString(),
-                                                            Telephone = newModelPlayer.Telephone, Email = newModelPlayer.Email});
+                                                            Telephone = newModelPlayer.Telephone, Email = newModelPlayer.Email, Status = "Active"});
                 return RedirectToAction("Index");
             }
             catch
@@ -113,18 +115,32 @@ namespace BPTennis.MVC.Controllers
 
         public ActionResult Delete(int id)
         {
-            return View();
+            var playerRepository = new PlayerRepository();
+            var domainPlayer = playerRepository.GetPlayerById(id);
+
+            var playerModel = new PlayerModel()
+            {
+                Id = domainPlayer.Id,
+                Name = domainPlayer.Name,
+                Surname = domainPlayer.Surname,
+                Gender = (Gender)Enum.Parse(typeof(Gender), domainPlayer.Gender),
+                Telephone = domainPlayer.Telephone,
+                Email = domainPlayer.Email
+            };
+
+            return View(playerModel);
         }
 
         //
         // POST: /Player/Delete/5
 
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Player player)
         {
             try
             {
-                // TODO: Add delete logic here
+                var playerRepository = new PlayerRepository();
+                playerRepository.ChangePlayerStatus(id);
 
                 return RedirectToAction("Index");
             }

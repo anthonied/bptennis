@@ -14,7 +14,8 @@ namespace BPTennis.Domain
         public string Gender { get; set; }
         public string Telephone { get; set; }
         public string Email { get; set; }
-        public bool IsAvailableToPlay { get; set; }
+        public bool AvailableToPlay { get; set; }
+        public string Status { get; set; }
 
         public Player()
         {
@@ -23,7 +24,7 @@ namespace BPTennis.Domain
 
         public void AddToPool(Pool pool)
         {
-            if (IsAvailableToPlay)
+            if (AvailableToPlay)
             pool.Player.Add(this);
         }
         public void SendToCourt(Court court)
@@ -38,11 +39,11 @@ namespace BPTennis.Domain
 
         public void SetToNotAvailableToPlay()
         {
-            IsAvailableToPlay = false;
+            AvailableToPlay = false;
         }
         public void SetToAvailableToPlay()
         {
-            IsAvailableToPlay = true;
+            AvailableToPlay = true;
         }
        
     }

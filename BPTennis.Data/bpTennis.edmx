@@ -18,6 +18,7 @@
           <Property Name="gender" Type="nchar" MaxLength="10" />
           <Property Name="telephone" Type="nchar" MaxLength="15" />
           <Property Name="email" Type="nchar" MaxLength="30" />
+          <Property Name="status" Type="nchar" MaxLength="10" />
         </EntityType>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -36,6 +37,7 @@
           <Property Name="gender" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
           <Property Type="String" Name="telephone" MaxLength="15" FixedLength="true" Unicode="true" />
           <Property Type="String" Name="email" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="status" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -46,6 +48,7 @@
           <EntitySetMapping Name="players">
             <EntityTypeMapping TypeName="bp_tennisModel.player">
               <MappingFragment StoreEntitySet="player">
+                <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="telephone" ColumnName="telephone" />
                 <ScalarProperty Name="id" ColumnName="id" />
