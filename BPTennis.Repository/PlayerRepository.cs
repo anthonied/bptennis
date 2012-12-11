@@ -64,5 +64,22 @@ namespace BPTennis.Repository
                        }).FirstOrDefault();                
             }
         }
+        public void UpdatePlayerDetails(Player player)
+        {
+            using (var model = new bp_tennisEntities())
+            {
+                var dbPlayer = (from p in model.players
+                                where p.id == player.Id
+                                select p).FirstOrDefault();
+
+                dbPlayer.name = player.Name;
+                dbPlayer.surname = player.Surname;
+                dbPlayer.gender = player.Gender;
+                dbPlayer.telephone = player.Telephone;
+                dbPlayer.email = player.Email;
+
+                model.SaveChanges();
+            }
+        }
     }
 }

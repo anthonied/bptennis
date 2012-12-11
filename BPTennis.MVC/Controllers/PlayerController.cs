@@ -22,7 +22,8 @@ namespace BPTennis.MVC.Controllers
 
             var domainPlayers = playerRepository.GetAllPlayers();
 
-            domainPlayers.ForEach(domainPlayer => players.Add(new PlayerModel { Name = domainPlayer.Name,
+            domainPlayers.ForEach(domainPlayer => players.Add(new PlayerModel {Id = domainPlayer.Id, 
+                    Name = domainPlayer.Name,
                     Surname = domainPlayer.Surname,
                     Gender = (Gender)Enum.Parse(typeof(Gender),domainPlayer.Gender), Telephone = domainPlayer.Telephone, Email = domainPlayer.Email}));
 
@@ -72,20 +73,32 @@ namespace BPTennis.MVC.Controllers
         public ActionResult Edit(int id)
         {
             var playerRepository = new PlayerRepository();
-            var domainPlayer = new playerRepository.GetPlayerById();
+            var domainPlayer = playerRepository.GetPlayerById(id);
 
-            return View();
+            var playerModel = new PlayerModel()
+            {
+                Id = domainPlayer.Id,
+                Name = domainPlayer.Name,
+                Surname = domainPlayer.Surname,
+                Gender = (Gender)Enum.Parse(typeof(Gender),domainPlayer.Gender),
+                Telephone = domainPlayer.Telephone,
+                Email = domainPlayer.Email
+            };
+
+            return View(playerModel);
         }
 
         //
         // POST: /Player/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Player player)
         {
             try
             {
-                // TODO: Add update logic here
+                var playerRepository = new PlayerRepository();
+
+                playerRepository.UpdatePlayerDetails(player);
 
                 return RedirectToAction("Index");
             }
