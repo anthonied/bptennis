@@ -1,12 +1,27 @@
-﻿@model BPTennis.MVC.Models.SessionModel
+﻿@model IEnumerable<BPTennis.MVC.Models.SessionModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Available Players";
 }
 
 <h2>Index</h2>
 
-@if(Model.HasPreviousPage){
-  
-    @Html.RouteLink("<<<", "Players", new { page (Model.PageIndex -1) })
+<p>
+    @Html.ActionLink("Add Player", "Add")
+</p>
+<table>
+    <tr>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
 }
+
+</table>
