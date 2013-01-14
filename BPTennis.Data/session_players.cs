@@ -12,21 +12,13 @@ namespace BPTennis.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class player
+    public partial class session_players
     {
-        public player()
-        {
-            this.session_players = new HashSet<session_players>();
-        }
-    
         public int id { get; set; }
-        public string name { get; set; }
-        public string surname { get; set; }
-        public string gender { get; set; }
-        public string telephone { get; set; }
-        public string email { get; set; }
-        public string status { get; set; }
+        public int session_id { get; set; }
+        public int player_id { get; set; }
     
-        public virtual ICollection<session_players> session_players { get; set; }
+        public virtual player player { get; set; }
+        public virtual session session { get; set; }
     }
 }

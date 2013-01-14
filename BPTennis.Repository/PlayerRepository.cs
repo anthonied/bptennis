@@ -125,5 +125,24 @@ namespace BPTennis.Repository
                 model.SaveChanges();
             }
         }
+        public List<Player> GetPlayersNotInSession(int sessionId)
+        {
+            using (var model = new bp_tennisEntities())
+            {
+                var playerIdsAllreadyChosen = from sp in model.session_players
+                                              where sp.session_id == sessionId
+                                              select sp.id;
+
+                var players = (from p in model.players
+                               where !playerIdsAllreadyChosen.Contains(p.id)
+                              select new Player
+                              {
+                                  Id = p.id,
+                                  Name = p.name,
+                                  Surname = p.surname
+                              }).ToList<Player>();
+                return players;
+            }
+        }
     }
 }

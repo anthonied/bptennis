@@ -10,7 +10,7 @@ namespace BPTennis.MVC.Models
     public class SessionModel
     {
         public int Id { get; set; }
-
+        public DateTime Date { get; set; }
         public Pool Pool { get; set; }
 
         public SessionModel()

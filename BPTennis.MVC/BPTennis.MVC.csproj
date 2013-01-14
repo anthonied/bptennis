@@ -178,6 +178,7 @@
     <Compile Include="Helpers\LocalizationEnumAttribute.cs" />
     <Compile Include="Helpers\SessionHelper.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AddActivePlayerModel.cs" />
     <Compile Include="Models\CourtModel.cs" />
     <Compile Include="Models\Gender.cs" />
     <Compile Include="Models\PlayerModel.cs" />
@@ -307,6 +308,7 @@
     <Content Include="Views\Court\Edit.cshtml" />
     <Content Include="Views\Court\Delete.cshtml" />
     <Content Include="Views\Session\Index.cshtml" />
+    <Content Include="Views\Session\AddActive.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

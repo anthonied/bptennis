@@ -16,7 +16,13 @@ namespace BPTennis.Domain
         public string Email { get; set; }
         public bool AvailableToPlay { get; set; }
         public string Status { get; set; }
-
+        public string DisplayName
+        {
+            get
+            {
+                return string.Format("{0} {1}", Name, Surname);
+            }
+        }
         public Player()
         {
        

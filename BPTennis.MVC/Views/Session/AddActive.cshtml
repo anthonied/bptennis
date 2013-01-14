@@ -1,0 +1,20 @@
+﻿@model BPTennis.MVC.Models.AddActivePlayerModel
+
+@{
+    ViewBag.Title = "AddActive";
+}
+
+<h2>Players</h2>
+
+<table>
+@foreach (var item in Model.AvailablePlayers) {
+
+        <tr>
+        <td>
+            <input type="button" value="@item.DisplayName" style="width:200px" onclick="document.location.href = '@Url.Action("AddActivePlayer", "Session", new { sessionId = Model.SessionId, playerId = item.Id })'"/> 
+        </td>
+    </tr>
+}
+    </table>
+
+

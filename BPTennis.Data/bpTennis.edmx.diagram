@@ -7,6 +7,11 @@
       <Diagram DiagramId="ccbb7b5e1e1e4582807dbd4d670b2e75" Name="Diagram1">
         <EntityTypeShape EntityType="bp_tennisModel.player" Width="1.5" PointX="1.25" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="bp_tennisModel.court" Width="1.5" PointX="7" PointY="1.125" />
+        <EntityTypeShape EntityType="bp_tennisModel.session" Width="1.5" PointX="9.1991060344498177" PointY="24.104552444119264" IsExpanded="true" />
+        <EntityTypeShape EntityType="bp_tennisModel.session_players" Width="1.5" PointX="1.18056045155067" PointY="10.14227043564537" />
+        <EntityTypeShape EntityType="bp_tennisModel.sysdiagram" Width="1.5" PointX="3.875" PointY="1.5" />
+        <AssociationConnector Association="bp_tennisModel.FK_session_players_player" />
+        <AssociationConnector Association="bp_tennisModel.FK_session_players_session" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

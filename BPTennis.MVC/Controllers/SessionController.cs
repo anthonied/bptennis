@@ -11,13 +11,16 @@ namespace BPTennis.MVC.Controllers
 {
     public class SessionController : Controller
     {
-        //
-        // GET: /Session/
+        
 
         public ActionResult Index()
         {
-            var session = new SessionModel();
 
+            var sessionRepository = new SessionRepository();
+            var domainSession = sessionRepository.GetTodaySession();
+
+            var session = new SessionModel { Id = domainSession.Id, Date = domainSession.Date };
+            session.Pool.Players = domainSession.ActivePlayers;
             return View(session);
         }
 
@@ -53,6 +56,30 @@ namespace BPTennis.MVC.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult AddActive(int sessionId)
+        {
+            var addActiveModel = new AddActivePlayerModel { SessionId = sessionId };            
+            var playerRepository = new PlayerRepository();
+            addActiveModel.AvailablePlayers = playerRepository.GetPlayersNotInSession(sessionId);
+            return View(addActiveModel);
+        }
+
+
+        public ActionResult AddActivePlayer(int sessionId, int playerId)
+        {
+            var sessionRepository = new SessionRepository();
+
+            if (sessionId == 0)
+            {                
+                sessionId = sessionRepository.CreateNewSessionForToday().Id;
+            }
+
+            sessionRepository.AddPlayer(sessionId, playerId);
+
+            return RedirectToAction("Index");
+
         }
 
         //

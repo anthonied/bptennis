@@ -3,6 +3,6 @@ C:\Development\Projects\BPTennis\BPTennis.Data\bin\Debug\BPTennis.Data.dll
 C:\Development\Projects\BPTennis\BPTennis.Data\bin\Debug\BPTennis.Data.pdb
 C:\Development\Projects\BPTennis\BPTennis.Data\bin\Debug\EntityFramework.dll
 C:\Development\Projects\BPTennis\BPTennis.Data\bin\Debug\EntityFramework.xml
-C:\Development\Projects\BPTennis\BPTennis.Data\obj\Debug\BPTennis.Data.csprojResolveAssemblyReference.cache
 C:\Development\Projects\BPTennis\BPTennis.Data\obj\Debug\BPTennis.Data.dll
 C:\Development\Projects\BPTennis\BPTennis.Data\obj\Debug\BPTennis.Data.pdb
+C:\Development\Projects\BPTennis\BPTennis.Data\obj\Debug\BPTennis.Data.csprojResolveAssemblyReference.cache
