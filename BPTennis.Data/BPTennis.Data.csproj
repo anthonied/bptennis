@@ -71,13 +71,10 @@
     <Compile Include="session.cs">
       <DependentUpon>bpTennis.tt</DependentUpon>
     </Compile>
+    <Compile Include="session_court_player.cs">
+      <DependentUpon>bpTennis.tt</DependentUpon>
+    </Compile>
     <Compile Include="session_players.cs">
-      <DependentUpon>bpTennis.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>bpTennis.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagrams_Result.cs">
       <DependentUpon>bpTennis.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagram.cs">

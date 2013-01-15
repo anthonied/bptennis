@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ccbb7b5e1e1e4582807dbd4d670b2e75" Name="Diagram1">
+      <Diagram DiagramId="ccbb7b5e1e1e4582807dbd4d670b2e75" Name="Diagram1" ZoomLevel="81">
         <EntityTypeShape EntityType="bp_tennisModel.player" Width="1.5" PointX="1.25" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="bp_tennisModel.court" Width="1.5" PointX="3.75" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="bp_tennisModel.session" Width="1.5" PointX="5" PointY="4.375" IsExpanded="true" />
@@ -12,6 +12,10 @@
         <EntityTypeShape EntityType="bp_tennisModel.sysdiagram" Width="1.5" PointX="11" PointY="1.375" IsExpanded="false" />
         <AssociationConnector Association="bp_tennisModel.FK_session_players_player" />
         <AssociationConnector Association="bp_tennisModel.FK_session_players_session" />
+        <EntityTypeShape EntityType="bp_tennisModel.session_court_player" Width="2" PointX="7.625" PointY="0.875" />
+        <AssociationConnector Association="bp_tennisModel.FK_session_court_player_court" />
+        <AssociationConnector Association="bp_tennisModel.FK_session_court_player_player" />
+        <AssociationConnector Association="bp_tennisModel.FK_session_court_player_session" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

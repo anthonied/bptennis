@@ -19,7 +19,10 @@ namespace BPTennis.MVC.Controllers
 
             var session = new SessionModel { Id = domainSession.Id, Date = domainSession.Date };
             session.Pool.Players = domainSession.ActivePlayers;
+            
             session.Courts = courtRepository.GetAllCourts();
+            if (session.Id != 0)
+                session.Courts.ForEach(court => court.Players = sessionRepository.GetPlayersForCourtForSession(session.Id, court.Id));
             return View(session);
         }
 
@@ -131,6 +134,24 @@ namespace BPTennis.MVC.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult AddPlayerToCourt(int courtId, string courtPlayers, int sessionId)
+        {
+            var playerIds = courtPlayers.Split("|".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            var courtRepository = new CourtRepository();
+            var playerRepository = new PlayerRepository();
+            var court = courtRepository.GetCourtById(courtId);
+            foreach (string playerId in playerIds)
+            {
+                var player = playerRepository.GetPlayerById(int.Parse(playerId));
+                player.SendToCourt(court);
+            }
+
+            var sessionRepository = new SessionRepository();
+            sessionRepository.SaveSessionCourt(court, sessionId);
+
+            return RedirectToAction("Index");
         }
     }
 }

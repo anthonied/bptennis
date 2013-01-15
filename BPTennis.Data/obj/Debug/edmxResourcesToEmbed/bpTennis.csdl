@@ -1,50 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="bp_tennisModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="bp_tennisEntities" p1:LazyLoadingEnabled="true">
-    <EntitySet Name="players" EntityType="bp_tennisModel.player" />
     <EntitySet Name="courts" EntityType="bp_tennisModel.court" />
+    <EntitySet Name="players" EntityType="bp_tennisModel.player" />
     <EntitySet Name="sessions" EntityType="bp_tennisModel.session" />
+    <EntitySet Name="session_court_player" EntityType="bp_tennisModel.session_court_player" />
     <EntitySet Name="session_players" EntityType="bp_tennisModel.session_players" />
     <EntitySet Name="sysdiagrams" EntityType="bp_tennisModel.sysdiagram" />
+    <AssociationSet Name="FK_session_court_player_court" Association="bp_tennisModel.FK_session_court_player_court">
+      <End Role="court" EntitySet="courts" />
+      <End Role="session_court_player" EntitySet="session_court_player" />
+    </AssociationSet>
+    <AssociationSet Name="FK_session_court_player_player" Association="bp_tennisModel.FK_session_court_player_player">
+      <End Role="player" EntitySet="players" />
+      <End Role="session_court_player" EntitySet="session_court_player" />
+    </AssociationSet>
     <AssociationSet Name="FK_session_players_player" Association="bp_tennisModel.FK_session_players_player">
       <End Role="player" EntitySet="players" />
       <End Role="session_players" EntitySet="session_players" />
+    </AssociationSet>
+    <AssociationSet Name="FK_session_court_player_session" Association="bp_tennisModel.FK_session_court_player_session">
+      <End Role="session" EntitySet="sessions" />
+      <End Role="session_court_player" EntitySet="session_court_player" />
     </AssociationSet>
     <AssociationSet Name="FK_session_players_session" Association="bp_tennisModel.FK_session_players_session">
       <End Role="session" EntitySet="sessions" />
       <End Role="session_players" EntitySet="session_players" />
     </AssociationSet>
-    <FunctionImport Name="sp_alterdiagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="version" Mode="In" Type="Int32" />
-      <Parameter Name="definition" Mode="In" Type="Binary" />
-    </FunctionImport>
-    <FunctionImport Name="sp_creatediagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="version" Mode="In" Type="Int32" />
-      <Parameter Name="definition" Mode="In" Type="Binary" />
-    </FunctionImport>
-    <FunctionImport Name="sp_dropdiagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(bp_tennisModel.sp_helpdiagramdefinition_Result)">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(bp_tennisModel.sp_helpdiagrams_Result)">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_renamediagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="new_diagramname" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="sp_upgraddiagrams" />
   </EntityContainer>
+  <EntityType Name="court">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+    <NavigationProperty Name="session_court_player" Relationship="bp_tennisModel.FK_session_court_player_court" FromRole="court" ToRole="session_court_player" />
+  </EntityType>
   <EntityType Name="player">
     <Key>
       <PropertyRef Name="id" />
@@ -53,34 +44,42 @@
     <Property Name="name" Type="String" MaxLength="20" Unicode="true" FixedLength="true" />
     <Property Name="surname" Type="String" MaxLength="30" Unicode="true" FixedLength="true" />
     <Property Name="gender" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
-    <Property Type="String" Name="telephone" MaxLength="15" FixedLength="true" Unicode="true" />
-    <Property Type="String" Name="email" MaxLength="30" FixedLength="true" Unicode="true" />
-    <Property Type="String" Name="status" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="telephone" Type="String" MaxLength="15" Unicode="true" FixedLength="true" />
+    <Property Name="email" Type="String" MaxLength="30" Unicode="true" FixedLength="true" />
+    <Property Name="status" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+    <NavigationProperty Name="session_court_player" Relationship="bp_tennisModel.FK_session_court_player_player" FromRole="player" ToRole="session_court_player" />
     <NavigationProperty Name="session_players" Relationship="bp_tennisModel.FK_session_players_player" FromRole="player" ToRole="session_players" />
-  </EntityType>
-  <EntityType Name="court">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="String" Name="name" MaxLength="10" FixedLength="true" Unicode="true" />
   </EntityType>
   <EntityType Name="session">
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="DateTime" Name="date" Nullable="false" Precision="0" />
+    <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="courts" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="session_court_player" Relationship="bp_tennisModel.FK_session_court_player_session" FromRole="session" ToRole="session_court_player" />
     <NavigationProperty Name="session_players" Relationship="bp_tennisModel.FK_session_players_session" FromRole="session" ToRole="session_players" />
-    <Property Type="String" Name="courts" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="session_court_player">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="session_id" Type="Int32" Nullable="false" />
+    <Property Name="court_id" Type="Int32" Nullable="false" />
+    <Property Name="player_id" Type="Int32" Nullable="false" />
+    <Property Name="in_progress" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="court" Relationship="bp_tennisModel.FK_session_court_player_court" FromRole="session_court_player" ToRole="court" />
+    <NavigationProperty Name="player" Relationship="bp_tennisModel.FK_session_court_player_player" FromRole="session_court_player" ToRole="player" />
+    <NavigationProperty Name="session" Relationship="bp_tennisModel.FK_session_court_player_session" FromRole="session_court_player" ToRole="session" />
   </EntityType>
   <EntityType Name="session_players">
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="Int32" Name="session_id" Nullable="false" />
-    <Property Type="Int32" Name="player_id" Nullable="false" />
+    <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="session_id" Type="Int32" Nullable="false" />
+    <Property Name="player_id" Type="Int32" Nullable="false" />
     <NavigationProperty Name="player" Relationship="bp_tennisModel.FK_session_players_player" FromRole="session_players" ToRole="player" />
     <NavigationProperty Name="session" Relationship="bp_tennisModel.FK_session_players_session" FromRole="session_players" ToRole="session" />
   </EntityType>
@@ -88,15 +87,39 @@
     <Key>
       <PropertyRef Name="diagram_id" />
     </Key>
-    <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Type="Int32" Name="principal_id" Nullable="false" />
-    <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="Int32" Name="version" />
-    <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
+  <Association Name="FK_session_court_player_court">
+    <End Role="court" Type="bp_tennisModel.court" Multiplicity="1" />
+    <End Role="session_court_player" Type="bp_tennisModel.session_court_player" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="court">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="session_court_player">
+        <PropertyRef Name="court_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_session_court_player_player">
+    <End Role="player" Type="bp_tennisModel.player" Multiplicity="1" />
+    <End Role="session_court_player" Type="bp_tennisModel.session_court_player" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="player">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="session_court_player">
+        <PropertyRef Name="player_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_session_players_player">
-    <End Type="bp_tennisModel.player" Role="player" Multiplicity="1" />
-    <End Type="bp_tennisModel.session_players" Role="session_players" Multiplicity="*" />
+    <End Role="player" Type="bp_tennisModel.player" Multiplicity="1" />
+    <End Role="session_players" Type="bp_tennisModel.session_players" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="player">
         <PropertyRef Name="id" />
@@ -106,9 +129,21 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_session_court_player_session">
+    <End Role="session" Type="bp_tennisModel.session" Multiplicity="1" />
+    <End Role="session_court_player" Type="bp_tennisModel.session_court_player" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="session">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="session_court_player">
+        <PropertyRef Name="session_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_session_players_session">
-    <End Type="bp_tennisModel.session" Role="session" Multiplicity="1" />
-    <End Type="bp_tennisModel.session_players" Role="session_players" Multiplicity="*" />
+    <End Role="session" Type="bp_tennisModel.session" Multiplicity="1" />
+    <End Role="session_players" Type="bp_tennisModel.session_players" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="session">
         <PropertyRef Name="id" />
@@ -118,15 +153,4 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <ComplexType Name="sp_helpdiagramdefinition_Result">
-    <Property Type="Int32" Name="version" Nullable="true" />
-    <Property Type="Binary" Name="definition" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="sp_helpdiagrams_Result">
-    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-    <Property Type="Int32" Name="ID" Nullable="false" />
-    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-    <Property Type="Int32" Name="OwnerID" Nullable="false" />
-  </ComplexType>
 </Schema>

@@ -14,7 +14,14 @@ namespace BPTennis.Data
     
     public partial class court
     {
+        public court()
+        {
+            this.session_court_player = new HashSet<session_court_player>();
+        }
+    
         public int Id { get; set; }
         public string name { get; set; }
+    
+        public virtual ICollection<session_court_player> session_court_player { get; set; }
     }
 }

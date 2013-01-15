@@ -5,16 +5,24 @@
 }
 
 <script type="text/javascript">
-    
+    var selectedPlayers = "";
     var originalBackColor = "#D3DCE0";
-    var selectedBackColor = "green";
+    var selectedBackColor = "lightgreen";
 
     function ChangeColour(clickedButton) {
-        
-        if (document.getElementById(clickedButton.id).style.backgroundColor == "" || document.getElementById(clickedButton.id).style.backgroundColor != selectedBackColor)
+        var playerId = clickedButton.id.toString().replace('button', '');
+        if (document.getElementById(clickedButton.id).style.backgroundColor == "" || document.getElementById(clickedButton.id).style.backgroundColor != selectedBackColor) {
             document.getElementById(clickedButton.id).style.backgroundColor = selectedBackColor;
-        else
+            selectedPlayers += playerId + "|";
+        }
+        else {
             document.getElementById(clickedButton.id).style.backgroundColor = originalBackColor;
+            selectedPlayers = selectedPlayers.replace(playerId + '|', '');
+        }        
+    }
+
+    function courtClick(courtId) {
+        document.location.href = "Session/AddPlayerToCourt?sessionId=@Model.Id&courtId=" + courtId + "&courtPlayers=" + selectedPlayers;
     }
 </script>
 
@@ -29,7 +37,7 @@
             <table>
             @foreach (var item in Model.Pool.Players) {
                <tr>
-                   <th><input id="@string.Format("button{0}",item.Id)" type="button" value="@item.DisplayName" onclick="ChangeColour(this)" /></th>
+                   <th><input id="@string.Format("button{0}",item.Id)" type="button" value="@item.DisplayName" onclick="ChangeColour(this)" style="width:250px" /></th>
                </tr>                 
             }
            </table>
@@ -41,26 +49,30 @@
                         <td style="width:200px">
                             <table>                                
                                 <tr>
-                                    <th style="border:1px solid black; width:100px; text-align:center;">
+                                    <th style="border:1px solid black; width:100px; text-align:center; cursor:pointer; background-color:#D3DCE0" onclick="courtClick(@Model.Courts[counter].Id)">
                                         @Model.Courts[counter].CourtName
                                     </th>
-                                </tr> 
-                                <tr>
-                                    <th style="border:1px solid black; height:50px; text-align:center;"></th>
                                 </tr>
+                                @foreach (var player in Model.Courts[counter].Players) { 
+                                <tr>
+                                    <th style="border:1px solid black; height:50px; text-align:center;">@player.Id</th>
+                                </tr>
+                                }
                             </table>
                         </td>
                         <td>
                             @if(counter+1 < Model.Courts.Count){                            
                              <table>                                
                                 <tr>
-                                    <th style="border:1px solid black; width:100px; text-align:center;">
+                                    <th style="border:1px solid black; width:100px; text-align:center; cursor:pointer; background-color:#D3DCE0" onclick="courtClick(@Model.Courts[counter+1].Id)">
                                         @Model.Courts[counter+1].CourtName
                                     </th>
                                 </tr> 
+                                @foreach (var player in Model.Courts[counter+1].Players) { 
                                 <tr>
-                                    <th style="border:1px solid black; height:50px; text-align:center;"></th>
+                                    <th style="border:1px solid black; height:50px; text-align:center;">@player.Id</th>
                                 </tr>
+                                }
                             </table>
                             }
                         </td>

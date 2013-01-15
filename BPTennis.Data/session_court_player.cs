@@ -10,10 +10,18 @@
 namespace BPTennis.Data
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_helpdiagramdefinition_Result
+    public partial class session_court_player
     {
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int id { get; set; }
+        public int session_id { get; set; }
+        public int court_id { get; set; }
+        public int player_id { get; set; }
+        public bool in_progress { get; set; }
+    
+        public virtual court court { get; set; }
+        public virtual player player { get; set; }
+        public virtual session session { get; set; }
     }
 }

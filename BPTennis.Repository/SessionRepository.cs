@@ -69,6 +69,34 @@ namespace BPTennis.Repository
                 model.SaveChanges();
             }
         }
+
+        public void SaveSessionCourt(Court court, int sessionId)
+        {
+            using (var model = new bp_tennisEntities())
+            {
+                
+                court.Players.ForEach(player => model.session_court_player.Add(new BPTennis.Data.session_court_player { court_id = court.Id,
+                        player_id = player.Id, 
+                        session_id = sessionId,
+                in_progress = true}));
+                
+                model.SaveChanges();
+            }
+        }
+
+        public List<Player> GetPlayersForCourtForSession(int sessionId, int courtId)
+        {
+            using(var model = new bp_tennisEntities())
+            {
+                var players = (from scp in model.session_court_player
+                              where scp.session_id == sessionId && scp.court_id == courtId && scp.in_progress
+                              select new Player{
+                                  Id = scp.player_id
+                                  
+                              }).ToList<Player>();
+                return players;
+            }
+        }
         
     }
 }
