@@ -10,5 +10,6 @@ namespace BPTennis.Domain
         public int Id { get; set; }
         public List<Player> ActivePlayers { get; set; }
         public DateTime Date { get; set; }
+        public List<Court> Courts { get; set; }
     }
 }

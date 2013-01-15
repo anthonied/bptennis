@@ -72,6 +72,7 @@
     <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Type="DateTime" Name="date" Nullable="false" Precision="0" />
     <NavigationProperty Name="session_players" Relationship="bp_tennisModel.FK_session_players_session" FromRole="session" ToRole="session_players" />
+    <Property Type="String" Name="courts" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="session_players">
     <Key>

@@ -21,6 +21,7 @@ namespace BPTennis.Data
     
         public int id { get; set; }
         public System.DateTime date { get; set; }
+        public string courts { get; set; }
     
         public virtual ICollection<session_players> session_players { get; set; }
     }

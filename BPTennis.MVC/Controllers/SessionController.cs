@@ -10,17 +10,16 @@ using System.Web.Mvc;
 namespace BPTennis.MVC.Controllers
 {
     public class SessionController : Controller
-    {
-        
-
+    {       
         public ActionResult Index()
         {
-
+            var courtRepository = new CourtRepository();            
             var sessionRepository = new SessionRepository();
             var domainSession = sessionRepository.GetTodaySession();
 
             var session = new SessionModel { Id = domainSession.Id, Date = domainSession.Date };
             session.Pool.Players = domainSession.ActivePlayers;
+            session.Courts = courtRepository.GetAllCourts();
             return View(session);
         }
 

@@ -40,6 +40,7 @@
     </Key>
     <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="courts" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="session_players">
     <Key>

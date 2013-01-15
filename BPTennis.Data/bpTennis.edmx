@@ -45,6 +45,7 @@
           </Key>
           <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="courts" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="session_players">
           <Key>
@@ -195,6 +196,7 @@
           <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="DateTime" Name="date" Nullable="false" Precision="0" />
           <NavigationProperty Name="session_players" Relationship="bp_tennisModel.FK_session_players_session" FromRole="session" ToRole="session_players" />
+          <Property Type="String" Name="courts" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="session_players">
           <Key>
@@ -281,6 +283,7 @@
           <EntitySetMapping Name="sessions">
             <EntityTypeMapping TypeName="bp_tennisModel.session">
               <MappingFragment StoreEntitySet="session">
+                <ScalarProperty Name="courts" ColumnName="courts" />
                 <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>

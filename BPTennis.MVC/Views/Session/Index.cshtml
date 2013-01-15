@@ -3,36 +3,77 @@
 @{
     ViewBag.Title = "Session";
 }
+
+<script type="text/javascript">
+    
+    var originalBackColor = "#D3DCE0";
+    var selectedBackColor = "green";
+
+    function ChangeColour(clickedButton) {
+        
+        if (document.getElementById(clickedButton.id).style.backgroundColor == "" || document.getElementById(clickedButton.id).style.backgroundColor != selectedBackColor)
+            document.getElementById(clickedButton.id).style.backgroundColor = selectedBackColor;
+        else
+            document.getElementById(clickedButton.id).style.backgroundColor = originalBackColor;
+    }
+</script>
+
 <table>
     <h3>@Model.Date.ToString("yyyy-MM-dd")</h3>
     <tr>
         <th style="width:500px"><h2>Available Players</h2></th>
         <th><h2>Courts</h2></th>
     </tr>
-@foreach (var item in Model.Pool.Players) {
     <tr>
         <td>
-           <input type="button" value="@item.DisplayName" style="width:200px" />
+            <table>
+            @foreach (var item in Model.Pool.Players) {
+               <tr>
+                   <th><input id="@string.Format("button{0}",item.Id)" type="button" value="@item.DisplayName" onclick="ChangeColour(this)" /></th>
+               </tr>                 
+            }
+           </table>
         </td>
-
         <td>
-
+            <table>                
+                @for(int counter=0; counter < Model.Courts.Count; counter += 2) {
+                    <tr>
+                        <td style="width:200px">
+                            <table>                                
+                                <tr>
+                                    <th style="border:1px solid black; width:100px; text-align:center;">
+                                        @Model.Courts[counter].CourtName
+                                    </th>
+                                </tr> 
+                                <tr>
+                                    <th style="border:1px solid black; height:50px; text-align:center;"></th>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>
+                            @if(counter+1 < Model.Courts.Count){                            
+                             <table>                                
+                                <tr>
+                                    <th style="border:1px solid black; width:100px; text-align:center;">
+                                        @Model.Courts[counter+1].CourtName
+                                    </th>
+                                </tr> 
+                                <tr>
+                                    <th style="border:1px solid black; height:50px; text-align:center;"></th>
+                                </tr>
+                            </table>
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
         </td>
 
     </tr>
-}
-@foreach (var item in Model.CourtName)
-{
-     <tr>
-         <td>
-             <input type="button" value="@item" />
-         </td>
-     </tr>
-}
+
 </table>
 
 <p>
     @Html.ActionLink("Add Player", "AddActive", new { sessionId = Model.Id })
-    @Html.ActionLink("Add Court", "AddCourt", new { sessionId = Model.Id })
 </p>
 

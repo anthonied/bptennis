@@ -25,6 +25,7 @@
     <EntitySetMapping Name="sessions">
       <EntityTypeMapping TypeName="bp_tennisModel.session">
         <MappingFragment StoreEntitySet="session">
+          <ScalarProperty Name="courts" ColumnName="courts" />
           <ScalarProperty Name="date" ColumnName="date" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>

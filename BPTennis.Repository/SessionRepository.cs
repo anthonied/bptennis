@@ -19,8 +19,7 @@ namespace BPTennis.Repository
                               select new Session
                               {
                                   Id = s.id,
-                                  Date = s.date
-                                
+                                  Date = s.date                                
                               }).FirstOrDefault();
 
                 if (session != null)
@@ -44,7 +43,8 @@ namespace BPTennis.Repository
                                     select new Player
                                     {
                                         Id = sp.player.id,
-                                        Name = sp.player.name
+                                        Name = sp.player.name,
+                                        Surname = sp.player.surname
                                     }).ToList<Player>();
                 return activePlayers;
             }
@@ -69,5 +69,6 @@ namespace BPTennis.Repository
                 model.SaveChanges();
             }
         }
+        
     }
 }
