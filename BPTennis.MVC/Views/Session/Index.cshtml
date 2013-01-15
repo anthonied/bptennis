@@ -1,4 +1,4 @@
-﻿@model BPTennis.MVC.Models.SessionModel 
+﻿@model BPTennis.MVC.Models.SessionModel
 
 @{
     ViewBag.Title = "Session";
@@ -16,14 +16,23 @@
         </td>
 
         <td>
-            @* lys van bane en die spelers op hulle *@
+
         </td>
 
     </tr>
 }
+@foreach (var item in Model.CourtName)
+{
+     <tr>
+         <td>
+             <input type="button" value="@item" />
+         </td>
+     </tr>
+}
 </table>
 
 <p>
-    @Html.ActionLink("Add Player", "AddActive", new { sessionId = Model.Id})
+    @Html.ActionLink("Add Player", "AddActive", new { sessionId = Model.Id })
+    @Html.ActionLink("Add Court", "AddCourt", new { sessionId = Model.Id })
 </p>
 
