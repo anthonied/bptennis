@@ -10,19 +10,24 @@ using System.Web.Mvc;
 namespace BPTennis.MVC.Controllers
 {
     public class SessionController : Controller
-    {       
+    {
+        SessionRepository sessionRepository = new SessionRepository();
+
         public ActionResult Index()
         {
             var courtRepository = new CourtRepository();            
-            var sessionRepository = new SessionRepository();
-            var domainSession = sessionRepository.GetTodaySession();
-
+            
+            var playerRepository = new PlayerRepository();
+            var domainSession = sessionRepository.GetTodaySession();            
             var session = new SessionModel { Id = domainSession.Id, Date = domainSession.Date };
             session.Pool.Players = domainSession.ActivePlayers;
             
             session.Courts = courtRepository.GetAllCourts();
             if (session.Id != 0)
                 session.Courts.ForEach(court => court.Players = sessionRepository.GetPlayersForCourtForSession(session.Id, court.Id));
+
+            RemovePlayersFromPoolWhoAreOnCourt(session);
+
             return View(session);
         }
 
@@ -152,6 +157,39 @@ namespace BPTennis.MVC.Controllers
             sessionRepository.SaveSessionCourt(court, sessionId);
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult RemovePlayersFromCourt(int courtId, int sessionId)
+        {
+            var sessionRepository = new SessionRepository();
+            var courtRepository = new CourtRepository();
+            var court = courtRepository.GetCourtById(courtId);
+
+            var playerIds = sessionRepository.PlayersOnSelectedCourt(sessionId, courtId);
+
+            foreach (var playerId in playerIds)
+            {
+                //sessionRepository.RemovePlayersFromCourt(courtId, sessionId, playerId);
+            }
+
+            sessionRepository.SaveSessionCourt(court, sessionId);
+
+
+            return RedirectToAction("Index");
+        }
+
+        private void RemovePlayersFromPoolWhoAreOnCourt(SessionModel session)
+        {
+            var playersOnCourtForThisSession = sessionRepository.PlayersAllreadyOnCourtForSession(session.Id);
+
+            
+                foreach (var player in playersOnCourtForThisSession)
+                {
+                    var poolPlayer = session.Pool.Players.Find(p => p.Id == player.Id);
+                    if (poolPlayer != null)
+                        session.Pool.Players.Remove(poolPlayer);
+                }
+            
         }
     }
 }

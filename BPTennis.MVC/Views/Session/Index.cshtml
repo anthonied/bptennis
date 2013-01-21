@@ -24,6 +24,10 @@
     function courtClick(courtId) {
         document.location.href = "Session/AddPlayerToCourt?sessionId=@Model.Id&courtId=" + courtId + "&courtPlayers=" + selectedPlayers;
     }
+
+    function courtRemoveClick(courtId) {
+        document.location.href = "Session/RemovePlayersFromCourt?sessionId=@Model.Id&courtId=" + courtId + "&courtPlayers=" + selectedPlayers;
+    }
 </script>
 
 <table>
@@ -52,10 +56,11 @@
                                     <th style="border:1px solid black; width:100px; text-align:center; cursor:pointer; background-color:#D3DCE0" onclick="courtClick(@Model.Courts[counter].Id)">
                                         @Model.Courts[counter].CourtName
                                     </th>
+                                    <th style="border:1px solid black; width:20px; text-align:center; cursor:pointer; background-color:#D3DCE0" onclick="courtRemoveClick(@Model.Courts[counter].Id)">X</th>
                                 </tr>
                                 @foreach (var player in Model.Courts[counter].Players) { 
                                 <tr>
-                                    <th style="border:1px solid black; height:50px; text-align:center;">@player.Id</th>
+                                    <th style="border:1px solid black; height:50px; text-align:center;">@player.Name @player.Surname</th>
                                 </tr>
                                 }
                             </table>
@@ -67,10 +72,11 @@
                                     <th style="border:1px solid black; width:100px; text-align:center; cursor:pointer; background-color:#D3DCE0" onclick="courtClick(@Model.Courts[counter+1].Id)">
                                         @Model.Courts[counter+1].CourtName
                                     </th>
+                                    <th style="border:1px solid black; width:20px; text-align:center; cursor:pointer; background-color:#D3DCE0" onclick="courtRemoveClick(@Model.Courts[counter+1].Id)">X</th>
                                 </tr> 
                                 @foreach (var player in Model.Courts[counter+1].Players) { 
                                 <tr>
-                                    <th style="border:1px solid black; height:50px; text-align:center;">@player.Id</th>
+                                    <th style="border:1px solid black; height:50px; text-align:center;">@player.Name @player.Surname</th>
                                 </tr>
                                 }
                             </table>

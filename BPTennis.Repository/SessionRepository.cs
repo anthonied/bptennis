@@ -90,11 +90,62 @@ namespace BPTennis.Repository
             {
                 var players = (from scp in model.session_court_player
                               where scp.session_id == sessionId && scp.court_id == courtId && scp.in_progress
-                              select new Player{
-                                  Id = scp.player_id
-                                  
+                              select new Player
+                              {               
+                                  Id = scp.player_id,
+                                  Name = scp.player.name,
+                                  Surname = scp.player.surname
                               }).ToList<Player>();
-                return players;
+                return players;                               
+            }
+        }
+
+        public List<Player> PlayersAllreadyOnCourtForSession(int sessionId)
+        {
+            using (var model = new bp_tennisEntities())
+            {
+            	var playersAllreadyOnCourt = (from scp in model.session_court_player
+                                              where scp.in_progress && scp.session_id == sessionId
+                                              select new Player
+                                              {
+                                                  Id = scp.player_id,
+                                                  Name = scp.player.name,
+                                                  Surname = scp.player.surname
+                                              }).ToList<Player>();
+                return playersAllreadyOnCourt;
+            }
+            
+        }
+        public List<Player> PlayersOnSelectedCourt(int sessionId, int courtId)
+        {
+            using (var model = new bp_tennisEntities())
+            {
+                var playerOnCourt = (from scp in model.session_court_player
+                                      where scp.in_progress && scp.session_id == sessionId && scp.court_id == courtId
+                                      select new Player
+                                      {
+                                          Id = scp.player_id,
+                                          Name = scp.player.name,
+                                          Surname = scp.player.surname
+                                      }).ToList<Player>();
+                return playerOnCourt;
+            }
+        }
+        public void RemovePlayersFromCourt(int courtId, int sessionId, int playerId)
+        {
+            using (var model = new bp_tennisEntities())
+            {
+                var playersOnCourt = (from scp in model.session_court_player
+                                      where scp.court_id == courtId && scp.session_id == sessionId && scp.player_id == playerId
+                                      select new session_court_player
+                                      {
+                                          session_id = scp.session_id,
+                                          court_id = scp.court_id,
+                                          player_id = scp.player_id
+                                      }).FirstOrDefault();
+
+                model.session_court_player.Remove(playersOnCourt);
+                model.SaveChanges();
             }
         }
         

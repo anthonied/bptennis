@@ -131,7 +131,7 @@ namespace BPTennis.Repository
             {
                 var playerIdsAllreadyChosen = from sp in model.session_players
                                               where sp.session_id == sessionId
-                                              select sp.id;
+                                              select sp.player_id;
 
                 var players = (from p in model.players
                                where !playerIdsAllreadyChosen.Contains(p.id)

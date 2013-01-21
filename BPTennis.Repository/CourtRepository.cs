@@ -78,6 +78,5 @@ namespace BPTennis.Repository
                 model.SaveChanges();
             }
         }
-
     }
 }
