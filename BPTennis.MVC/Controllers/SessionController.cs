@@ -149,9 +149,9 @@ namespace BPTennis.MVC.Controllers
             var court = courtRepository.GetCourtById(courtId);
             foreach (string playerId in playerIds)
             {
-                var player = playerRepository.GetPlayerById(int.Parse(playerId));
-                player.SendToCourt(court);
-            }
+                var player = playerRepository.GetPlayerById(int.Parse(playerId));                
+                    player.SendToCourt(court);                    
+            }           
 
             var sessionRepository = new SessionRepository();
             sessionRepository.SaveSessionCourt(court, sessionId);
@@ -161,19 +161,21 @@ namespace BPTennis.MVC.Controllers
 
         public ActionResult RemovePlayersFromCourt(int courtId, int sessionId)
         {
-            var sessionRepository = new SessionRepository();
-            var courtRepository = new CourtRepository();
-            var court = courtRepository.GetCourtById(courtId);
+            //var sessionRepository = new SessionRepository();
+            //var courtRepository = new CourtRepository();
+            //var court = courtRepository.GetCourtById(courtId);
 
-            var playerIds = sessionRepository.PlayersOnSelectedCourt(sessionId, courtId);
+            ////var playerIds = sessionRepository.GetPlayersOnSelectedCourt(sessionId, courtId);
 
-            foreach (var playerId in playerIds)
-            {
-                //sessionRepository.RemovePlayersFromCourt(courtId, sessionId, playerId);
-            }
+            ////foreach (var item in playerIds)
+            ////{
+            ////    int playerId = item.Id;
+            ////    sessionRepository.RemovePlayersFromCourt(courtId, sessionId, playerId);
+            ////}
 
-            sessionRepository.SaveSessionCourt(court, sessionId);
+            ////sessionRepository.SaveSessionCourt(court, sessionId);
 
+            sessionRepository.RemoveAllPlayersFromCourt(courtId, sessionId);
 
             return RedirectToAction("Index");
         }

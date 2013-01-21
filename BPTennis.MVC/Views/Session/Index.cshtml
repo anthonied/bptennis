@@ -22,12 +22,20 @@
     }
 
     function courtClick(courtId) {
-        document.location.href = "Session/AddPlayerToCourt?sessionId=@Model.Id&courtId=" + courtId + "&courtPlayers=" + selectedPlayers;
+        var playerIds = selectedPlayers.split("|");
+        var numberOfSelectedPlayers = playerIds.length - 1;
+
+        if (numberOfSelectedPlayers == 4)
+            document.location.href = "Session/AddPlayerToCourt?sessionId=@Model.Id&courtId=" + courtId + "&courtPlayers=" + selectedPlayers;
+        else
+            alert("Please select 4 players.");
     }
 
     function courtRemoveClick(courtId) {
         document.location.href = "Session/RemovePlayersFromCourt?sessionId=@Model.Id&courtId=" + courtId + "&courtPlayers=" + selectedPlayers;
     }
+
+ 
 </script>
 
 <table>

@@ -20,14 +20,12 @@ namespace BPTennis.Domain
 
         public void FinishGame()
         {
+
             Players = new List<Player>();
         }
         public Court()
         {
             Players = new List<Player>();
         }
-
-
-
     }
 }

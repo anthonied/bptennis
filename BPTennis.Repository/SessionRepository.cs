@@ -116,7 +116,7 @@ namespace BPTennis.Repository
             }
             
         }
-        public List<Player> PlayersOnSelectedCourt(int sessionId, int courtId)
+        public List<Player> GetPlayersOnSelectedCourt(int sessionId, int courtId)
         {
             using (var model = new bp_tennisEntities())
             {
@@ -135,16 +135,27 @@ namespace BPTennis.Repository
         {
             using (var model = new bp_tennisEntities())
             {
-                var playersOnCourt = (from scp in model.session_court_player
+                var player = (from scp in model.session_court_player
                                       where scp.court_id == courtId && scp.session_id == sessionId && scp.player_id == playerId
-                                      select new session_court_player
-                                      {
-                                          session_id = scp.session_id,
-                                          court_id = scp.court_id,
-                                          player_id = scp.player_id
-                                      }).FirstOrDefault();
+                                     select scp).FirstOrDefault();
 
-                model.session_court_player.Remove(playersOnCourt);
+                player.in_progress = false;                
+                model.SaveChanges();
+            }
+        }
+        public void RemoveAllPlayersFromCourt(int courtId, int sessionId)
+        {
+            using (var model = new bp_tennisEntities())
+            {
+                var players = from scp in model.session_court_player
+                              where scp.court_id == courtId && scp.session_id == sessionId
+                              select scp;
+
+                foreach (var player in players)
+                {
+                    player.in_progress = false;
+                }
+                
                 model.SaveChanges();
             }
         }
