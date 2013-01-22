@@ -1,0 +1,122 @@
+﻿@model BPTennis.MVC.Models.EndOfGameSessionModel
+
+@{
+    ViewBag.Title = "EndOfGame";
+}
+
+<script type="text/javascript">
+
+    var selectedPlayers = "";
+    var originalColor = "#D3DCE0";
+    var winningTeamColor = "green";
+    var redTeam = "red";
+    var blueTeam = "blue";
+    var fontColor = "white";
+    var fontColorWon = "black";
+    var redCounter = 0;
+
+    function SelectTeam(clickedButton) {
+        var playerId = clickedButton.id.toString().replace('button', '');        
+
+        if (document.getElementById(clickedButton.id).style.backgroundColor != "red" && redCounter < 2) {
+            document.getElementById(clickedButton.id).style.backgroundColor = redTeam;
+            document.getElementById(clickedButton.id).style.color = fontColor;
+            redCounter++;
+            selectedPlayers += playerId + "|";
+
+        }
+        else if (document.getElementById(clickedButton.id).style.backgroundColor == "blue"){
+            document.getElementById(clickedButton.id).style.backgroundColor = originalColor;
+            document.getElementById(clickedButton.id).style.color = "black";
+        }
+        else if (redCounter == 2 && document.getElementById(clickedButton.id).style.backgroundColor != "red") {
+            document.getElementById(clickedButton.id).style.backgroundColor = blueTeam;
+            document.getElementById(clickedButton.id).style.color = fontColor;
+            selectedPlayers += playerId + "|";
+        }
+        else if (document.getElementById(clickedButton.id).style.backgroundColor == "red") {
+            redCounter--;
+            document.getElementById(clickedButton.id).style.backgroundColor = originalColor;
+            document.getElementById(clickedButton.id).style.color = "black";
+            selectedPlayers = selectedPlayers.replace(playerId + '|', '');
+        }
+        
+    }
+    function RedTeamWon() {
+        if (document.getElementById('blueTeam').style.backgroundColor != winningTeamColor) {
+            if (document.getElementById('redTeam').style.backgroundColor == "" || document.getElementById('redTeam').style.backgroundColor != winningTeamColor) {
+                document.getElementById('redTeam').style.backgroundColor = winningTeamColor;
+                document.getElementById('redTeam').style.color = fontColorWon;
+            }
+            else {
+                document.getElementById('redTeam').style.backgroundColor = redTeam;
+                document.getElementById('redTeam').style.color = fontColor;
+            }
+        }
+        else {
+            alert("Please choose only one team!");
+        }
+    }
+
+    function BlueTeamWon() {
+        if (document.getElementById('redTeam').style.backgroundColor != winningTeamColor) {
+            if (document.getElementById('blueTeam').style.backgroundColor == "" || document.getElementById('blueTeam').style.backgroundColor != winningTeamColor) {
+                document.getElementById('blueTeam').style.backgroundColor = winningTeamColor;
+                document.getElementById('blueTeam').style.color = fontColorWon;
+            }
+            else {
+                document.getElementById('blueTeam').style.backgroundColor = blueTeam;
+                document.getElementById('blueTeam').style.color = fontColor;
+            }
+        }
+        else {
+            alert("Please choose only one team!");
+        }
+    }
+
+    function Finish() {
+        var playerIds = selectedPlayers.split("|");
+    }
+
+</script>
+
+<table>
+    <h2>End Of Game</h2>
+    <tr>
+        <th style="width:500px"><h2>Teams</h2></th>
+        <th><h2>Won</h2></th>
+    </tr>
+    <tr>
+        <td>
+            <table>
+                @foreach (var item in Model.CourtPlayers) {
+        
+                    <tr>
+                        <td>
+                            <input id="@string.Format("button{0}",item.Id)" type="button" value="@item.DisplayName" style="width:200px" onclick="SelectTeam(this)" />
+                        </td>
+                    </tr> 
+                }
+            </table>
+        </td>
+        <td>
+            <table>
+                <tr>
+                    <td>
+                        <input style="background-color:red; color:white; width:100px; height:100px;" id="redTeam" type="button" value="Red" onclick="RedTeamWon()" />
+                    </td>
+                    <td>
+                        <input style="background-color:blue; color:white; width:100px; height:100px;" id="blueTeam" type="button" value="Blue" onclick="BlueTeamWon()" />
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td>
+                        <input style="width:150px; height:100px;" id="Finish" type="button" value="Finish" onclick="Finish()" />
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

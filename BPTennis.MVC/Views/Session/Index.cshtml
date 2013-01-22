@@ -27,12 +27,15 @@
 
         if (numberOfSelectedPlayers == 4)
             document.location.href = "Session/AddPlayerToCourt?sessionId=@Model.Id&courtId=" + courtId + "&courtPlayers=" + selectedPlayers;
-        else
+        else {
             alert("Please select 4 players.");
+            document.location.href = "Session/RemovePlayersFromCourt?sessionId=@Model.Id&courtId=" + courtId + "&courtPlayers=" + selectedPlayers;
+        }
     }
 
     function courtRemoveClick(courtId) {
         document.location.href = "Session/RemovePlayersFromCourt?sessionId=@Model.Id&courtId=" + courtId + "&courtPlayers=" + selectedPlayers;
+        document.location.href = "Session/EndOfGame?sessionId=@Model.Id&courtId=" + courtId + "&courtPlayers=" + selectedPlayers;
     }
 
  

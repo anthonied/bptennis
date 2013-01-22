@@ -73,6 +73,14 @@ namespace BPTennis.MVC.Controllers
             return View(addActiveModel);
         }
 
+        public ActionResult EndOfGame(int sessionId, int courtId)
+        {
+            var endOfGameModel = new EndOfGameSessionModel { SessionId = sessionId, CourtId = courtId };
+            var sessionRepository = new SessionRepository();
+            endOfGameModel.CourtPlayers = sessionRepository.GetPlayersOnSelectedCourt(sessionId, courtId);
+            return View(endOfGameModel);
+        }
+
 
         public ActionResult AddActivePlayer(int sessionId, int playerId)
         {

@@ -164,6 +164,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CourtController.cs" />
+    <Compile Include="Controllers\EndOfGameSessionModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\SessionController.cs" />
@@ -309,6 +310,7 @@
     <Content Include="Views\Court\Delete.cshtml" />
     <Content Include="Views\Session\Index.cshtml" />
     <Content Include="Views\Session\AddActive.cshtml" />
+    <Content Include="Views\Session\EndOfGame.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
