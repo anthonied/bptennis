@@ -47,23 +47,6 @@ namespace BPTennis.Tests
         }
 
         [Test]
-        public void CanSendAvailablePoolPlayerToAvailaleCourt()
-        {
-            var availablePlayer = _onePlayerPool.Players.First();
-
-            var availableCourts = new List<Court>();            
-
-            availableCourts.Add(new Court()
-            {
-                CourtName = "A1"
-            });
-
-            availablePlayer.SendToCourt(availableCourts.First());            
-
-            Assert.That(availableCourts.First().Players.First().Name, Is.EqualTo("Christopher"));
-        }
-
-        [Test]
         public void CanRemovePlayerFromPool()
         {
             var availablePlayer = _onePlayerPool.Players.First();
@@ -112,7 +95,11 @@ namespace BPTennis.Tests
         [Test]
         public void CanNotSendPlayerToCourtWhenCourtIsFull()
         {
-            var availablePlayer = _onePlayerPool.Players.First();
+            var session = new Session();
+
+            var availablePlayer = new Player { Id = 1, Name = "Gerhardus" };
+            session.ActivePlayers.Add(availablePlayer);
+
 
             var ourCourt = new Court
             {
@@ -126,7 +113,7 @@ namespace BPTennis.Tests
                 new Player() {Id = 12, Name = "Johan"}
             };
 
-            availablePlayer.SendToCourt(ourCourt);
+            availablePlayer.SendToCourt(ourCourt, session);
 
             Assert.That(ourCourt.Players.Count, Is.EqualTo(4));
         }
@@ -181,19 +168,41 @@ namespace BPTennis.Tests
         [Test]
         public void PlayerFinishedMustBeRemovedFromCourt()
         {
+            var session = new Session();
+            session.ActivePlayers = new List<Player> { 
+                new Player { Id = 1, Name = "Christopher" },
+                new Player { Id = 2, Name = "Gerbrand" },
+                new Player { Id = 3, Name = "Hernus" },
+                new Player { Id = 13, Name = "Drilene" }};
+
             var courtPlayer = new Player() { Id = 13, Name = "Drilene" };
             var ourCourt = new Court
             {
                 CourtName = "A1"
             };
-            courtPlayer.SendToCourt(ourCourt);
+            ourCourt.Repository = new TestCourtRepository();
+            courtPlayer.SendToCourt(ourCourt, session);
 
             ourCourt.FinishGame();
 
             Assert.That(ourCourt.Players.Find(player => player.Id == courtPlayer.Id), Is.Null);
         }
 
-        
+        [Test]
+        public void PlayerSendToCourtIsNotAvailableToPlay()
+        {
+            var session = new Session();
+            session.ActivePlayers = new List<Player> { 
+                new Player { Id = 1, Name = "Christopher" },
+                new Player { Id = 2, Name = "Gerbrand" },
+                new Player { Id = 3, Name = "Hernus" },
+                new Player { Id = 4, Name = "Filamon" }};
+            var court = new Court{Id =1};
+
+            session.ActivePlayers[2].SendToCourt(court, session);
+
+            Assert.That(session.ActivePlayers.Find(player => player.Id == 3), Is.Null);
+        }
        
         private Player _getChrisThePlayer()
         {

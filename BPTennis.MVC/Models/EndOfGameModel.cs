@@ -6,7 +6,7 @@ using System.Text;
 
 namespace BPTennis.MVC.Models
 {
-    public class EndOfGameSessionModel
+    public class EndOfGameModel
     {
         public int SessionId { get; set; }
         public int CourtId { get; set; }

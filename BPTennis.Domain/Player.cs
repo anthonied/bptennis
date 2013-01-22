@@ -7,7 +7,7 @@ namespace BPTennis.Domain
 {
     public class Player
     {
-
+        public IPlayer Repository;
         public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
@@ -33,10 +33,13 @@ namespace BPTennis.Domain
             if (AvailableToPlay)
             pool.Players.Add(this);
         }
-        public void SendToCourt(Court court)
+        public void SendToCourt(Court court, Session session)
         {
             if (!court.Full)
              court.Players.Add(this);
+
+            session.ActivePlayers.Remove(session.ActivePlayers.Find(player => player.Id == this.Id));
+            Repository.RemovePlayerFromActiveListInSession(this.Id);
         }
         public void RemoveFromPool(Pool pool)
         {

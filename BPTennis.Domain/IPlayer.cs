@@ -9,6 +9,7 @@ namespace BPTennis.Domain
     {
         void InsertPlayer(Player player);
         void UpdatePlayer(Player player);
+        void RemovePlayerFromActiveListInSession(int playerId);
 
     }
 }

@@ -164,7 +164,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CourtController.cs" />
-    <Compile Include="Controllers\EndOfGameSessionModel.cs" />
+    <Compile Include="Models\CommentsModel.cs" />
+    <Compile Include="Models\EndOfGameModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\SessionController.cs" />
@@ -311,6 +312,7 @@
     <Content Include="Views\Session\Index.cshtml" />
     <Content Include="Views\Session\AddActive.cshtml" />
     <Content Include="Views\Session\EndOfGame.cshtml" />
+    <Content Include="Views\Comments\AddComment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -344,7 +346,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>52139</DevelopmentServerPort>
+          <DevelopmentServerPort>55562</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:57895/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

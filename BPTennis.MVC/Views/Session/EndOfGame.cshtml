@@ -1,4 +1,4 @@
-﻿@model BPTennis.MVC.Models.EndOfGameSessionModel
+﻿@model BPTennis.MVC.Models.EndOfGameModel
 
 @{
     ViewBag.Title = "EndOfGame";
@@ -76,6 +76,7 @@
 
     function Finish() {
         var playerIds = selectedPlayers.split("|");
+        document.location.href = "RemovePlayersFromCourt?sessionId=@Model.SessionId&courtId=@Model.CourtId";
     }
 
 </script>

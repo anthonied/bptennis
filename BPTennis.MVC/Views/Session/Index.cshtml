@@ -9,16 +9,18 @@
     var originalBackColor = "#D3DCE0";
     var selectedBackColor = "lightgreen";
 
-    function ChangeColour(clickedButton) {
+    function ChangeColour(clickedButton) {        
         var playerId = clickedButton.id.toString().replace('button', '');
+       
         if (document.getElementById(clickedButton.id).style.backgroundColor == "" || document.getElementById(clickedButton.id).style.backgroundColor != selectedBackColor) {
             document.getElementById(clickedButton.id).style.backgroundColor = selectedBackColor;
             selectedPlayers += playerId + "|";
         }
         else {
             document.getElementById(clickedButton.id).style.backgroundColor = originalBackColor;
-            selectedPlayers = selectedPlayers.replace(playerId + '|', '');
-        }        
+            selectedPlayers = selectedPlayers.replace('|' + playerId + '|', '|');
+        }
+        
     }
 
     function courtClick(courtId) {
@@ -28,16 +30,13 @@
         if (numberOfSelectedPlayers == 4)
             document.location.href = "Session/AddPlayerToCourt?sessionId=@Model.Id&courtId=" + courtId + "&courtPlayers=" + selectedPlayers;
         else {
-            alert("Please select 4 players.");
-            document.location.href = "Session/RemovePlayersFromCourt?sessionId=@Model.Id&courtId=" + courtId + "&courtPlayers=" + selectedPlayers;
+            alert("Please select 4 players!");          
         }
     }
 
-    function courtRemoveClick(courtId) {
-        document.location.href = "Session/RemovePlayersFromCourt?sessionId=@Model.Id&courtId=" + courtId + "&courtPlayers=" + selectedPlayers;
+    function courtRemoveClick(courtId) {       
         document.location.href = "Session/EndOfGame?sessionId=@Model.Id&courtId=" + courtId + "&courtPlayers=" + selectedPlayers;
     }
-
  
 </script>
 

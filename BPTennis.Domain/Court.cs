@@ -7,6 +7,7 @@ namespace BPTennis.Domain
 {
     public class Court
     {
+        public ICourt Repository;
         public int Id { get; set; }
         public string CourtName { get; set; }
         public List<Player> Players { get; set; }
@@ -18,14 +19,17 @@ namespace BPTennis.Domain
             }
         }
 
-        public void FinishGame()
-        {
-
-            Players = new List<Player>();
-        }
         public Court()
         {
             Players = new List<Player>();
         }
+
+        public void FinishGame(int sessionId)
+        {            
+            Repository.AddPlayersToSessionActivePlayers(sessionId, Players);
+            Players = new List<Player>();
+            Repository.RemovePlayersFromCourt(this.Id);            
+        }
+        
     }
 }

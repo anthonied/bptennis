@@ -12,11 +12,10 @@ namespace BPTennis.MVC.Controllers
     public class SessionController : Controller
     {
         SessionRepository sessionRepository = new SessionRepository();
+        CourtRepository courtRepository = new CourtRepository(); 
 
         public ActionResult Index()
         {
-            var courtRepository = new CourtRepository();            
-            
             var playerRepository = new PlayerRepository();
             var domainSession = sessionRepository.GetTodaySession();            
             var session = new SessionModel { Id = domainSession.Id, Date = domainSession.Date };
@@ -25,8 +24,6 @@ namespace BPTennis.MVC.Controllers
             session.Courts = courtRepository.GetAllCourts();
             if (session.Id != 0)
                 session.Courts.ForEach(court => court.Players = sessionRepository.GetPlayersForCourtForSession(session.Id, court.Id));
-
-            RemovePlayersFromPoolWhoAreOnCourt(session);
 
             return View(session);
         }
@@ -75,7 +72,7 @@ namespace BPTennis.MVC.Controllers
 
         public ActionResult EndOfGame(int sessionId, int courtId)
         {
-            var endOfGameModel = new EndOfGameSessionModel { SessionId = sessionId, CourtId = courtId };
+            var endOfGameModel = new EndOfGameModel { SessionId = sessionId, CourtId = courtId };
             var sessionRepository = new SessionRepository();
             endOfGameModel.CourtPlayers = sessionRepository.GetPlayersOnSelectedCourt(sessionId, courtId);
             return View(endOfGameModel);
@@ -151,17 +148,17 @@ namespace BPTennis.MVC.Controllers
 
         public ActionResult AddPlayerToCourt(int courtId, string courtPlayers, int sessionId)
         {
-            var playerIds = courtPlayers.Split("|".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            var courtRepository = new CourtRepository();
+            var playerIds = courtPlayers.Split("|".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);            
             var playerRepository = new PlayerRepository();
             var court = courtRepository.GetCourtById(courtId);
+            var session = sessionRepository.GetTodaySession();
+
             foreach (string playerId in playerIds)
             {
-                var player = playerRepository.GetPlayerById(int.Parse(playerId));                
-                    player.SendToCourt(court);                    
-            }           
-
-            var sessionRepository = new SessionRepository();
+                var player = playerRepository.GetPlayerById(int.Parse(playerId));
+                player.Repository = sessionRepository;
+                    player.SendToCourt(court,session);                    
+            }                       
             sessionRepository.SaveSessionCourt(court, sessionId);
 
             return RedirectToAction("Index");
@@ -169,22 +166,10 @@ namespace BPTennis.MVC.Controllers
 
         public ActionResult RemovePlayersFromCourt(int courtId, int sessionId)
         {
-            //var sessionRepository = new SessionRepository();
-            //var courtRepository = new CourtRepository();
-            //var court = courtRepository.GetCourtById(courtId);
-
-            ////var playerIds = sessionRepository.GetPlayersOnSelectedCourt(sessionId, courtId);
-
-            ////foreach (var item in playerIds)
-            ////{
-            ////    int playerId = item.Id;
-            ////    sessionRepository.RemovePlayersFromCourt(courtId, sessionId, playerId);
-            ////}
-
-            ////sessionRepository.SaveSessionCourt(court, sessionId);
-
-            sessionRepository.RemoveAllPlayersFromCourt(courtId, sessionId);
-
+            var court = courtRepository.GetCourtForSessionById(courtId, sessionId);
+            court.Repository = sessionRepository;
+            court.FinishGame(sessionId);
+            
             return RedirectToAction("Index");
         }
 
@@ -198,8 +183,7 @@ namespace BPTennis.MVC.Controllers
                     var poolPlayer = session.Pool.Players.Find(p => p.Id == player.Id);
                     if (poolPlayer != null)
                         session.Pool.Players.Remove(poolPlayer);
-                }
-            
+                }           
         }
     }
 }

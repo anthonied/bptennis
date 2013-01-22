@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Court.cs" />
     <Compile Include="Gender.cs" />
+    <Compile Include="ICourt.cs" />
     <Compile Include="IPlayer.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Pool.cs" />

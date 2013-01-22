@@ -42,15 +42,45 @@ namespace BPTennis.Repository
         {
             using (var model = new bp_tennisEntities())
             {
-                return (from c in model.courts
+                var court = (from c in model.courts
                        where c.Id == id
                        select new Court()
                             {    
                                 Id = c.Id,
                                 CourtName = c.name
                             }).FirstOrDefault();
+
+                return court;
             }
         }
+
+        public Court GetCourtForSessionById(int courtId, int sessionId)
+        {
+            using (var model = new bp_tennisEntities())
+            {
+                var court = (from c in model.courts
+                             where c.Id == courtId
+                             select new Court()
+                             {
+                                 Id = c.Id,
+                                 CourtName = c.name
+                             }).FirstOrDefault();
+
+
+                var courtPlayers = (from scp in model.session_court_player
+                                    where scp.court_id == courtId && sessionId == sessionId && scp.in_progress == true
+                                    select new Player
+                                    {
+                                        Id = scp.player.id,
+                                        Name = scp.player.name                                       
+                                    }).ToList<Player>();
+
+                court.Players = courtPlayers;
+
+                return court;
+            }
+        }
+
 
         public void UpdateCourtDetails(Court court)
         {

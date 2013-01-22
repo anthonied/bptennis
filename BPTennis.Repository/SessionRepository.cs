@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace BPTennis.Repository
 {
-    public class SessionRepository
+    public class SessionRepository:ICourt, IPlayer
     {
+        
         public Session GetTodaySession()
         {            
             using (var model = new bp_tennisEntities())
@@ -143,22 +144,55 @@ namespace BPTennis.Repository
                 model.SaveChanges();
             }
         }
-        public void RemoveAllPlayersFromCourt(int courtId, int sessionId)
+       
+        public void RemovePlayersFromCourt(int courtId)
         {
             using (var model = new bp_tennisEntities())
             {
                 var players = from scp in model.session_court_player
-                              where scp.court_id == courtId && scp.session_id == sessionId
+                              where scp.court_id == courtId
                               select scp;
 
                 foreach (var player in players)
                 {
                     player.in_progress = false;
                 }
-                
+
                 model.SaveChanges();
             }
         }
-        
+
+        public void InsertPlayer(Player player)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdatePlayer(Player player)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemovePlayerFromActiveListInSession(int playerId)
+        {
+            using (var model = new bp_tennisEntities())
+            {
+                var player = (from sp in model.session_players
+                             where sp.player_id == playerId
+                             select sp).FirstOrDefault();
+
+                model.session_players.Remove(player);
+                model.SaveChanges();
+            }
+        }
+
+        public void AddPlayersToSessionActivePlayers(int sessionId, List<Player> courtPlayers)
+        {
+            using (var model = new bp_tennisEntities())
+            {
+                courtPlayers.ForEach(player => model.session_players.Add(new session_players { player_id = player.Id, session_id = sessionId }));
+                model.SaveChanges();
+            }
+            
+        }
     }
 }

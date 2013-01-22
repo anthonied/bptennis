@@ -11,5 +11,10 @@ namespace BPTennis.Domain
         public List<Player> ActivePlayers { get; set; }
         public DateTime Date { get; set; }
         public List<Court> Courts { get; set; }
+
+        public Session()
+        {
+            ActivePlayers = new List<Player>();
+        }
     }
 }

@@ -13,6 +13,10 @@ namespace BPTennis.Tests
         {
             
         }
+        public void RemovePlayerFromActiveListInSession(int id)
+        {
+            throw new NotImplementedException();
+        }
         public void UpdatePlayer(Player param1)
         {
             throw new NotImplementedException();
