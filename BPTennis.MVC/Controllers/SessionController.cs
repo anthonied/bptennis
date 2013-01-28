@@ -164,12 +164,27 @@ namespace BPTennis.MVC.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult SendPlayerHome(int sessionId, int playerId)
+        {
+            sessionRepository.RemovePlayerFromActiveListInSession(playerId);
+            return RedirectToAction("Index");
+        }
+
         public ActionResult RemovePlayersFromCourt(int courtId, int sessionId)
         {
             var court = courtRepository.GetCourtForSessionById(courtId, sessionId);
             court.Repository = sessionRepository;
             court.FinishGame(sessionId);
             
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult CancelEntireGame(int courtId, int sessionId, List<Player> courtPlayers)
+        {
+            var court = courtRepository.GetCourtForSessionById(courtId, sessionId);
+            court.Repository = sessionRepository;
+            court.CancelGame(sessionId, courtId);
+
             return RedirectToAction("Index");
         }
 

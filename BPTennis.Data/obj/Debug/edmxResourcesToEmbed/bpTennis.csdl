@@ -27,6 +27,7 @@
       <End Role="session" EntitySet="sessions" />
       <End Role="session_players" EntitySet="session_players" />
     </AssociationSet>
+    <EntitySet Name="comments1" EntityType="bp_tennisModel.comments" />
   </EntityContainer>
   <EntityType Name="court">
     <Key>
@@ -153,4 +154,12 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="comments">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="comment" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BPTennis.Data;
+using BPTennis.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +10,35 @@ namespace BPTennis.Repository
 {
     public class CommentRepository
     {
+        public void AddComment(string name, string comment)
+        {
+            using (var model = new bp_tennisEntities())
+            {
+                BPTennis.Data.comments dbComment = new comments()
+                {
+                    name = name,
+                    comment = comment
+                };
+
+                model.comments.Add(dbComment);
+                model.SaveChanges();
+            }
+        }
+        public List<Comments> GetAllComments()
+        {
+            using (var model = new bp_tennisEntities())
+            {
+                var comment = (from c in model.comments
+                               select new Comments
+                               {
+                                   Name = c.name,
+                                   Comment = c.comment
+                               }).ToList<Comments>();
+                return comment;
+
+            }
+
+        }
+
     }
 }

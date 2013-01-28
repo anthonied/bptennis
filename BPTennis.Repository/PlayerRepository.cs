@@ -35,7 +35,7 @@ namespace BPTennis.Repository
             {
                 var players = (from p in model.players
                                where p.status == "Active"
-                              select new Player
+                               select new Player
                               {
                                   Id = p.id,
                                   Name = p.name,

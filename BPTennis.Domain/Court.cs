@@ -30,6 +30,11 @@ namespace BPTennis.Domain
             Players = new List<Player>();
             Repository.RemovePlayersFromCourt(this.Id);            
         }
-        
+        public void CancelGame(int sessionId, int courtId)
+        {
+            Repository.AddPlayersToSessionActivePlayers(sessionId, Players);
+            Players = new List<Player>();
+            Repository.CancelCurrentGame(this.Id);
+        }
     }
 }

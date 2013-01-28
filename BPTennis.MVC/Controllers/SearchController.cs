@@ -1,6 +1,4 @@
-﻿using BPTennis.MVC.Models;
-using BPTennis.Repository;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,41 +6,18 @@ using System.Web.Mvc;
 
 namespace BPTennis.MVC.Controllers
 {
-    public class CommentController : Controller
+    public class SearchController : Controller
     {
         //
-        // GET: /Comment/
+        // GET: /Search/
 
         public ActionResult Index()
         {
-            var comments = new List<CommentsModel>();
-            var commentRepository = new CommentRepository();
-
-            var domainComments = commentRepository.GetAllComments();
-
-            domainComments.ForEach(domainComment => comments.Add(new CommentsModel { Name = domainComment.Name, Comment = domainComment.Comment }));
-
-            return View("Index");
+            return View();
         }
 
-        public ActionResult AddComment(string name, string comment)
-        {
-            var commentRepository = new CommentRepository();
-
-            commentRepository.AddComment(name, comment);
-
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult Comments()
-        {
-            var commentModel = new CommentsModel();
-            var commentRepository = new CommentRepository();
-            commentModel.CommentList = commentRepository.GetAllComments();
-            return View(commentModel);
-        }
         //
-        // GET: /Comment/Details/5
+        // GET: /Search/Details/5
 
         public ActionResult Details(int id)
         {
@@ -50,7 +25,7 @@ namespace BPTennis.MVC.Controllers
         }
 
         //
-        // GET: /Comment/Create
+        // GET: /Search/Create
 
         public ActionResult Create()
         {
@@ -58,7 +33,7 @@ namespace BPTennis.MVC.Controllers
         }
 
         //
-        // POST: /Comment/Create
+        // POST: /Search/Create
 
         [HttpPost]
         public ActionResult Create(FormCollection collection)
@@ -76,7 +51,7 @@ namespace BPTennis.MVC.Controllers
         }
 
         //
-        // GET: /Comment/Edit/5
+        // GET: /Search/Edit/5
 
         public ActionResult Edit(int id)
         {
@@ -84,7 +59,7 @@ namespace BPTennis.MVC.Controllers
         }
 
         //
-        // POST: /Comment/Edit/5
+        // POST: /Search/Edit/5
 
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
@@ -102,7 +77,7 @@ namespace BPTennis.MVC.Controllers
         }
 
         //
-        // GET: /Comment/Delete/5
+        // GET: /Search/Delete/5
 
         public ActionResult Delete(int id)
         {
@@ -110,7 +85,7 @@ namespace BPTennis.MVC.Controllers
         }
 
         //
-        // POST: /Comment/Delete/5
+        // POST: /Search/Delete/5
 
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)

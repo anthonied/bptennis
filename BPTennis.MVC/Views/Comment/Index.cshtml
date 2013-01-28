@@ -1,10 +1,29 @@
-﻿@model IEnumerable<BPTennis.MVC.Models.CommentsModel>
+﻿@model BPTennis.MVC.Models.CommentsModel
 
 @{
     ViewBag.Title = "Index";
 }
 
+<script type="text/javascript">   
+
+    function AddComment() {
+        var playerName = document.getElementById('playerName').value;
+        var playerComment = document.getElementById('playerComment').value;
+        document.location.href = "Comment/AddComment?name=" + playerName + "&comment=" + playerComment;
+    }
+
+</script>
+
 <h2>Add a comment</h2>
+
+
+<table>
+    <tr>
+        <th>
+            @Html.ActionLink("View Comments", "Comments")
+        </th>
+    </tr>
+</table>
 
 <table>
     <tr>
@@ -12,7 +31,7 @@
             Name:
         </td>
         <td>
-            <input type="text" style="border:medium; width:150px;" />
+            <input id="playerName" type="text" style="border:double; width:150px;" />
         </td>        
     </tr>
     <tr>
@@ -20,16 +39,14 @@
             Comment:
         </td>
         <td>
-            <input type="text" style="border:medium; width:750px; height:250px;" />
+            <textarea id="playerComment" style="height:150px; width:500px; border:double"></textarea>
         </td>
     </tr>
     <tr>
         <td>
-            <input type="button" style="width:150px" value="Add Comment" onclick="" />
+            <input id="button1" type="button" style="width:150px" value="Add Comment" onclick="AddComment()" />
         </td>
     </tr>
-
-
 </table>
 
 

@@ -183,7 +183,7 @@ namespace BPTennis.Tests
             ourCourt.Repository = new TestCourtRepository();
             courtPlayer.SendToCourt(ourCourt, session);
 
-            ourCourt.FinishGame();
+            ourCourt.FinishGame(session.Id);
 
             Assert.That(ourCourt.Players.Find(player => player.Id == courtPlayer.Id), Is.Null);
         }
@@ -202,6 +202,29 @@ namespace BPTennis.Tests
             session.ActivePlayers[2].SendToCourt(court, session);
 
             Assert.That(session.ActivePlayers.Find(player => player.Id == 3), Is.Null);
+        }
+
+        [Test]
+        public void CanCancelEntireGame()
+        {
+            var session = new Session();
+            session.ActivePlayers = new List<Player> {
+                new Player { Id = 1, Name = "Christopher" }, 
+                new Player { Id = 2, Name = "Gerbrand" },
+                new Player { Id = 3, Name = "Hernus" },
+                new Player { Id = 4, Name = "Filamon" }};
+
+            var court = new Court { Id = 1, CourtName = "A1" };
+
+            int index = 0;
+            foreach (var player in session.ActivePlayers)
+            {
+                session.ActivePlayers[index].SendToCourt(court, session);
+                index++;
+            }
+            court.CancelGame(session.Id, court.Id);
+            Assert.That(court.Players, Is.False);          
+
         }
        
         private Player _getChrisThePlayer()

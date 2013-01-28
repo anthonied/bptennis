@@ -37,6 +37,11 @@
     function courtRemoveClick(courtId) {       
         document.location.href = "Session/EndOfGame?sessionId=@Model.Id&courtId=" + courtId + "&courtPlayers=" + selectedPlayers;
     }
+
+    function PlayerGoHome(clickedButton) {
+        var playerId = clickedButton.id.toString().replace('button', '');
+        document.location.href = "Session/SendPlayerHome?sessionId=@Model.Id&playerId=" + playerId;
+    }
  
 </script>
 
@@ -52,6 +57,7 @@
             @foreach (var item in Model.Pool.Players) {
                <tr>
                    <th><input id="@string.Format("button{0}",item.Id)" type="button" value="@item.DisplayName" onclick="ChangeColour(this)" style="width:250px" /></th>
+                   <th><input id="@string.Format("button{0}",item.Id)" type="button" value="X" onclick="PlayerGoHome(this)" style="width:20px;" /></th>
                </tr>                 
             }
            </table>

@@ -10,7 +10,8 @@ namespace BPTennis.Repository
 {
     public class SessionRepository:ICourt, IPlayer
     {
-        
+
+
         public Session GetTodaySession()
         {            
             using (var model = new bp_tennisEntities())
@@ -193,6 +194,23 @@ namespace BPTennis.Repository
                 model.SaveChanges();
             }
             
+        }
+
+        public void CancelCurrentGame(int courtId)
+        {
+            using (var model = new bp_tennisEntities())
+            {
+                var players = from scp in model.session_court_player
+                              where scp.court_id == courtId
+                              select scp;
+
+                foreach (var player in players)
+                {
+                    model.session_court_player.Remove(player);
+                }
+
+                model.SaveChanges();
+            }
         }
     }
 }

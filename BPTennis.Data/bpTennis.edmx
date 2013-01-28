@@ -6,6 +6,7 @@
     <edmx:StorageModels>
     <Schema Namespace="bp_tennisModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="bp_tennisModelStoreContainer">
+          <EntitySet Name="comments" EntityType="bp_tennisModel.Store.comments" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="court" EntityType="bp_tennisModel.Store.court" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="player" EntityType="bp_tennisModel.Store.player" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="session" EntityType="bp_tennisModel.Store.session" store:Type="Tables" Schema="dbo" />
@@ -33,6 +34,14 @@
             <End Role="session_players" EntitySet="session_players" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="comments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="comment" Type="varchar" Nullable="false" MaxLength="500" />
+        </EntityType>
         <EntityType Name="court">
           <Key>
             <PropertyRef Name="Id" />
@@ -179,6 +188,7 @@
             <End Role="session" EntitySet="sessions" />
             <End Role="session_players" EntitySet="session_players" />
           </AssociationSet>
+          <EntitySet Name="comments1" EntityType="bp_tennisModel.comments" />
         </EntityContainer>
         <EntityType Name="court">
           <Key>
@@ -305,6 +315,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="comments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="comment" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -369,6 +387,15 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comments1">
+            <EntityTypeMapping TypeName="bp_tennisModel.comments">
+              <MappingFragment StoreEntitySet="comments">
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

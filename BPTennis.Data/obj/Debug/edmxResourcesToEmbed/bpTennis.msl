@@ -62,5 +62,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="comments1">
+      <EntityTypeMapping TypeName="bp_tennisModel.comments">
+        <MappingFragment StoreEntitySet="comments">
+          <ScalarProperty Name="comment" ColumnName="comment" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

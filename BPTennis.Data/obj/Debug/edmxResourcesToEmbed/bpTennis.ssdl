@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="bp_tennisModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="bp_tennisModelStoreContainer">
+    <EntitySet Name="comments" EntityType="bp_tennisModel.Store.comments" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="court" EntityType="bp_tennisModel.Store.court" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="player" EntityType="bp_tennisModel.Store.player" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="session" EntityType="bp_tennisModel.Store.session" store:Type="Tables" Schema="dbo" />
@@ -28,6 +29,14 @@
       <End Role="session_players" EntitySet="session_players" />
     </AssociationSet>
   </EntityContainer>
+  <EntityType Name="comments">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="comment" Type="varchar" Nullable="false" MaxLength="500" />
+  </EntityType>
   <EntityType Name="court">
     <Key>
       <PropertyRef Name="Id" />

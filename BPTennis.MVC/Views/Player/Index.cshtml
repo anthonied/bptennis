@@ -51,12 +51,12 @@
         <td>
             @Html.DisplayFor(modelItem => item.Gender)
         </td>
-        <th>
+        <td>
             @Html.DisplayFor(modelItem => item.Telephone)
-        </th>
-        <th>
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Email)
-        </th>
+        </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new {id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })

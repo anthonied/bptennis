@@ -79,6 +79,11 @@
         document.location.href = "RemovePlayersFromCourt?sessionId=@Model.SessionId&courtId=@Model.CourtId";
     }
 
+    function Cancel() {
+        var playerIds = selectedPlayers.split("|");
+        document.location.href = "CancelEntireGame?sessionId=@Model.SessionId&courtId=@Model.CourtId&courtPlayers=@Model.CourtPlayers";
+    }
+
 </script>
 
 <table>
@@ -115,6 +120,9 @@
                 <tr>
                     <td>
                         <input style="width:150px; height:100px;" id="Finish" type="button" value="Finish" onclick="Finish()" />
+                    </td>
+                    <td>
+                        <input style="width:150px; height:100px;" id="Cancel" type="button" value="Cancel Game" onclick="Cancel()"
                     </td>
                 </tr>
             </table>

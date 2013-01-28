@@ -7,6 +7,7 @@ namespace BPTennis.Domain
 {
     public interface ICourt
     {
+        void CancelCurrentGame(int courtId);
         void RemovePlayersFromCourt(int courtId);
         void AddPlayersToSessionActivePlayers(int sessionId, List<Player> courtPlayers);
     }
