@@ -163,6 +163,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\CourtController.cs" />
     <Compile Include="Models\CommentsModel.cs" />
     <Compile Include="Models\EndOfGameModel.cs" />
@@ -312,7 +313,7 @@
     <Content Include="Views\Session\Index.cshtml" />
     <Content Include="Views\Session\AddActive.cshtml" />
     <Content Include="Views\Session\EndOfGame.cshtml" />
-    <Content Include="Views\Comments\AddComment.cshtml" />
+    <Content Include="Views\Comment\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
