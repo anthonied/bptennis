@@ -1,0 +1,22 @@
+﻿@model BPTennis.MVC.Models.SearchResultModel
+
+@{
+    ViewBag.Title = "SearchResults";
+}
+
+<h2>Search Results</h2>
+
+<table>
+@foreach (var item in Model.Players) {
+    <tr>
+        <td>
+            @item.DisplayName
+        </td>
+    </tr>
+}
+    <tr>
+        <td>
+           | @Html.ActionLink("Back", "Index") |
+        </td>
+    </tr>
+</table>

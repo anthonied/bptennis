@@ -187,6 +187,7 @@
     <Compile Include="Models\Gender.cs" />
     <Compile Include="Models\PlayerModel.cs" />
     <Compile Include="Models\SearchModel.cs" />
+    <Compile Include="Models\SearchResultModel.cs" />
     <Compile Include="Models\SessionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -319,6 +320,7 @@
     <Content Include="Views\Comment\Index.cshtml" />
     <Content Include="Views\Comment\Comments.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Search\SearchResults.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

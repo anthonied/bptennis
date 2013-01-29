@@ -212,5 +212,22 @@ namespace BPTennis.Repository
                 model.SaveChanges();
             }
         }
+        public List<Player> RetrieveSessionPlayersByDate(DateTime date)
+        {
+            using (var model = new bp_tennisEntities())
+            {
+                var players = (from scp in model.session_court_player
+                               where scp.session.date == date
+                               select new Player
+                               {
+                                   Name = scp.player.name,
+                                   Surname = scp.player.surname,
+                               }).ToList<Player>();
+
+                //var playersOrdered = players.GroupBy(player => player.DisplayName, player => new PlayerEntry { Player = player, NoGames = player.cou });
+                return players;
+            }
+                               
+        }
     }
 }

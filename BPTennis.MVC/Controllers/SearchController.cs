@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BPTennis.MVC.Models;
+using BPTennis.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,9 +18,13 @@ namespace BPTennis.MVC.Controllers
             return View();
         }
 
-        public ActionResult PlayersFromSelectedDate(int sessionId)
+        public ActionResult SearchResults(DateTime date)
         {
-            return RedirectToAction("Index");
+            var searchResultModel = new SearchResultModel { Date = date };
+            var sessionRepository = new SessionRepository();
+            searchResultModel.Players = sessionRepository.RetrieveSessionPlayersByDate(date);
+
+            return View(searchResultModel);
         }
 
 

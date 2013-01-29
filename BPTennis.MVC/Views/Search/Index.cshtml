@@ -7,7 +7,13 @@
 <script>
 
     function Search(date) {
-        document.location.href = "Search/PlayersFromSelectedDate?sessionId=@Model.SessionId"
+
+        if (date == '') {
+            alert("Please enter a date!")
+        }
+        else {
+            document.location.href = "Search/SearchResults?date=" + date;
+        }
     }
 
 </script>
@@ -25,7 +31,8 @@
     </tr>
     <tr>
         <td>
-            <input type="button" style="width:150px; height:100px;" value="Search" onclick="Search(document.getElementById('date'))" />
+            <input type="button" style="width:150px; height:100px;" value="Search" onclick="Search(document.getElementById('date').value.toString('yyyy-MM-dd'))" />
         </td>        
     </tr>
 </table>
+
