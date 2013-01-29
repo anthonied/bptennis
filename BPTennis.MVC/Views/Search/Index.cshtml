@@ -4,24 +4,28 @@
     ViewBag.Title = "Index";
 }
 
-<script  type="text/javascript">  
- $(document).ready(function () {  
- $(".dp").datepicker({  
-             changeMonth: true,  
-             changeYear: true,  
-             dateFormat: 'yy-mm-dd'  
-                   });  
-                });  
-</script>  
+<script>
+
+    function Search(date) {
+        document.location.href = "Search/PlayersFromSelectedDate?sessionId=@Model.SessionId"
+    }
+
+</script>
 
 <h2>Index</h2>
 
-<div class="editor-label">  
-    @Html.LabelFor(model => model.Date)
-</div>  
-<div class="editor-field">  
-    @Html.EditorFor(model => model.Date) 
-    @Html.ValidationMessageFor(model => model.Date)
-</div> 
-
-
+<table>
+    <tr>
+        <th style="width:150px;">
+            Please Specify Date: 
+        </th>
+        <td>
+            <input id="date" type="text" style="width:200px;" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="button" style="width:150px; height:100px;" value="Search" onclick="Search(document.getElementById('date'))" />
+        </td>        
+    </tr>
+</table>

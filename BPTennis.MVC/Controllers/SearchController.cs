@@ -16,6 +16,13 @@ namespace BPTennis.MVC.Controllers
             return View();
         }
 
+        public ActionResult PlayersFromSelectedDate(int sessionId)
+        {
+            return RedirectToAction("Index");
+        }
+
+
+
         //
         // GET: /Search/Details/5
 
