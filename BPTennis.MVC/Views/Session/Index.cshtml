@@ -23,6 +23,25 @@
         
     }
 
+    function GetIndex(sender) {
+        var aElements = sender.parentNode.parentNode.getElementById(selectedPlayers);
+        var aElementsLength = aElements.length;
+
+        var index;
+        for (var i = 0; i < aElementsLength; i++) {
+            if (aElements[i] == sender) //this condition is never true
+            {
+                index = i;
+                return index;
+            }
+        }
+        alert(index);
+    }
+
+    function playerPosition() {
+
+    }
+
     function courtClick(courtId) {
         var playerIds = selectedPlayers.split("|");
         var numberOfSelectedPlayers = playerIds.length - 1;
@@ -54,8 +73,16 @@
     <tr>
         <td>
             <table>
-            @foreach (var item in Model.Pool.Players) {
                <tr>
+                   <td>
+                       <input type="button" value="Move Player Up" onclick="playerPosition(), GetIndex(selectedPlayers)" />
+                   </td>
+                   <td>
+                       <input type="button" value="Move Player Down" onclick="playerPosition()" />
+                   </td>
+                </tr>
+            @foreach (var item in Model.Pool.Players) {
+                <tr>
                    <th><input id="@string.Format("button{0}",item.Id)" type="button" value="@item.DisplayName" onclick="ChangeColour(this)" style="width:250px" /></th>
                    <th><input id="@string.Format("button{0}",item.Id)" type="button" value="X" onclick="PlayerGoHome(this)" style="width:20px;" /></th>
                </tr>                 

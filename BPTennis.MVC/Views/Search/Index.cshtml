@@ -1,4 +1,4 @@
-﻿@model BPTennis.MVC.Models.SearchModel
+﻿@model IEnumerable<BPTennis.MVC.Models.SearchModel>
 
 @{
     ViewBag.Title = "Index";
@@ -6,14 +6,9 @@
 
 <script>
 
-    function Search(date) {
-
-        if (date == '') {
-            alert("Please enter a date!")
-        }
-        else {
-            document.location.href = "Search/SearchResults?date=" + date;
-        }
+    function Search(clickedButton) {
+        date = clickedButton.id.toString().replace('button', '');
+        document.location.href = "Search/SearchResults?date=" + date;
     }
 
 </script>
@@ -21,6 +16,22 @@
 <h2>Index</h2>
 
 <table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <input type="button" id="@string.Format("button{0}",item.Date)" value="@item.Date.ToLongDateString()" onclick="Search(this)" />
+        </td>        
+    </tr>
+}
+
+</table>
+@*<table>
     <tr>
         <th style="width:150px;">
             Please Specify Date: 
@@ -34,5 +45,5 @@
             <input type="button" style="width:150px; height:100px;" value="Search" onclick="Search(document.getElementById('date').value.toString('yyyy-MM-dd'))" />
         </td>        
     </tr>
-</table>
+</table>*@
 

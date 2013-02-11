@@ -36,6 +36,19 @@ namespace BPTennis.Repository
             }
             
         }
+
+        public int GetSessionIdFromDate(DateTime date)
+        {
+            using (var model = new bp_tennisEntities())
+            {
+                var session = (from s in model.sessions
+                               where s.date == date
+                               select s
+                             ).FirstOrDefault();
+                return session.id;
+            }
+            
+        }
         private List<Player> GetActivePlayersForSession(int sessionId)
         {
             using (var model = new bp_tennisEntities())
@@ -212,22 +225,37 @@ namespace BPTennis.Repository
                 model.SaveChanges();
             }
         }
-        public List<Player> RetrieveSessionPlayersByDate(DateTime date)
+
+        public List<PlayerGames> RetrievePlayerGamesForSession(int sessionId)
         {
             using (var model = new bp_tennisEntities())
             {
                 var players = (from scp in model.session_court_player
-                               where scp.session.date == date
-                               select new Player
+                               where scp.session_id == sessionId
+                               group scp by scp.player.name into n
+                               select new PlayerGames
                                {
-                                   Name = scp.player.name,
-                                   Surname = scp.player.surname,
-                               }).ToList<Player>();
+                                   Name = n.Key,
+                                   NumberOfGames = n.Count()
+                               }).ToList<PlayerGames>();
 
-                //var playersOrdered = players.GroupBy(player => player.DisplayName, player => new PlayerEntry { Player = player, NoGames = player.cou });
                 return players;
-            }
-                               
+            }                               
         }
+
+        public List<Session> RetrieveAllDaysPlayed()
+        {
+            using (var model = new bp_tennisEntities())
+            {
+                var days = (from s in model.sessions
+                            select new Session
+                            {
+                                Date = s.date
+                            }).ToList<Session>();
+                return days;
+            }
+        }
+
+
     }
 }

@@ -7,11 +7,23 @@
 <h2>Search Results</h2>
 
 <table>
-@foreach (var item in Model.Players) {
+    <tr>
+        <th>
+            Player
+        </th>
+        <th>
+            Games Played
+        </th>
+    </tr>
+@foreach (var item in Model.PlayerGames) {
     <tr>
         <td>
-            @item.DisplayName
+            @item.Name
         </td>
+        <td>
+            @item.NumberOfGames
+        </td>
+
     </tr>
 }
     <tr>

@@ -15,19 +15,25 @@ namespace BPTennis.MVC.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var days = new List<SearchModel>();
+
+            var sessionRepository = new SessionRepository();
+
+            var daysPlayed = sessionRepository.RetrieveAllDaysPlayed();
+
+            daysPlayed.ForEach(dayPlayed => days.Add(new SearchModel { Date = dayPlayed.Date }));
+
+            return View(days);
         }
 
         public ActionResult SearchResults(DateTime date)
         {
-            var searchResultModel = new SearchResultModel { Date = date };
+            var searchResultModel = new SearchResultModel();
             var sessionRepository = new SessionRepository();
-            searchResultModel.Players = sessionRepository.RetrieveSessionPlayersByDate(date);
+            searchResultModel.PlayerGames = sessionRepository.RetrievePlayerGamesForSession(sessionRepository.GetSessionIdFromDate(date));
 
             return View(searchResultModel);
         }
-
-
 
         //
         // GET: /Search/Details/5
