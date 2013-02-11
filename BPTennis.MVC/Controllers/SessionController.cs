@@ -28,6 +28,14 @@ namespace BPTennis.MVC.Controllers
             return View(session);
         }
 
+        public ActionResult GainPlayerPosition(int sessionId, int playerId)
+        {
+            var sessionRepository = new SessionRepository();
+
+            sessionRepository.GainPosition(playerId);
+
+            return View("Index");
+        }
         //
         // GET: /Session/Details/5
 

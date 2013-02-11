@@ -31,6 +31,6 @@ namespace BPTennis.Data
         public DbSet<session_court_player> session_court_player { get; set; }
         public DbSet<session_players> session_players { get; set; }
         public DbSet<sysdiagram> sysdiagrams { get; set; }
-        public DbSet<comments> comments { get; set; }
+        public DbSet<comments> comments1 { get; set; }
     }
 }

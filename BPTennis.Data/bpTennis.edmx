@@ -86,6 +86,7 @@
           <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="session_id" Type="int" Nullable="false" />
           <Property Name="player_id" Type="int" Nullable="false" />
+          <Property Name="player_order" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -244,6 +245,7 @@
           <Property Name="player_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="player" Relationship="bp_tennisModel.FK_session_players_player" FromRole="session_players" ToRole="player" />
           <NavigationProperty Name="session" Relationship="bp_tennisModel.FK_session_players_session" FromRole="session_players" ToRole="session" />
+          <Property Type="Int32" Name="player_order" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -373,6 +375,7 @@
           <EntitySetMapping Name="session_players">
             <EntityTypeMapping TypeName="bp_tennisModel.session_players">
               <MappingFragment StoreEntitySet="session_players">
+                <ScalarProperty Name="player_order" ColumnName="player_order" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="session_id" ColumnName="session_id" />
                 <ScalarProperty Name="player_id" ColumnName="player_id" />

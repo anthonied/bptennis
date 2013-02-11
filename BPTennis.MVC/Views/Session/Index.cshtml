@@ -23,23 +23,10 @@
         
     }
 
-    function GetIndex(sender) {
-        var aElements = sender.parentNode.parentNode.getElementById(selectedPlayers);
-        var aElementsLength = aElements.length;
+    function playerPositionUp() {
+        var playerId = selectedPlayers;
 
-        var index;
-        for (var i = 0; i < aElementsLength; i++) {
-            if (aElements[i] == sender) //this condition is never true
-            {
-                index = i;
-                return index;
-            }
-        }
-        alert(index);
-    }
-
-    function playerPosition() {
-
+        document.location.href = "Session/GainPlayerPosition?sessionId=@Model.Id&playerId=" + playerId;
     }
 
     function courtClick(courtId) {
@@ -75,7 +62,7 @@
             <table>
                <tr>
                    <td>
-                       <input type="button" value="Move Player Up" onclick="playerPosition(), GetIndex(selectedPlayers)" />
+                       <input type="button" value="Move Player Up" onclick="playerPositionUp()" />
                    </td>
                    <td>
                        <input type="button" value="Move Player Down" onclick="playerPosition()" />

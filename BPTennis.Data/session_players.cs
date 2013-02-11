@@ -17,6 +17,7 @@ namespace BPTennis.Data
         public int id { get; set; }
         public int session_id { get; set; }
         public int player_id { get; set; }
+        public Nullable<int> player_order { get; set; }
     
         public virtual player player { get; set; }
         public virtual session session { get; set; }

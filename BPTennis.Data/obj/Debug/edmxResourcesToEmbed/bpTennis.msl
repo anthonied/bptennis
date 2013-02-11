@@ -45,6 +45,7 @@
     <EntitySetMapping Name="session_players">
       <EntityTypeMapping TypeName="bp_tennisModel.session_players">
         <MappingFragment StoreEntitySet="session_players">
+          <ScalarProperty Name="player_order" ColumnName="player_order" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="session_id" ColumnName="session_id" />
           <ScalarProperty Name="player_id" ColumnName="player_id" />

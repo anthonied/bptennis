@@ -20,7 +20,7 @@ namespace BPTennis.Repository
                     comment = comment
                 };
 
-                model.comments.Add(dbComment);
+                model.comments1.Add(dbComment);
                 model.SaveChanges();
             }
         }
@@ -28,7 +28,7 @@ namespace BPTennis.Repository
         {
             using (var model = new bp_tennisEntities())
             {
-                var comment = (from c in model.comments
+                var comment = (from c in model.comments1
                                select new Comments
                                {
                                    Name = c.name,

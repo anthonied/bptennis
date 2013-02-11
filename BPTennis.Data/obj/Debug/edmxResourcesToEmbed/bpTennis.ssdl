@@ -81,6 +81,7 @@
     <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="session_id" Type="int" Nullable="false" />
     <Property Name="player_id" Type="int" Nullable="false" />
+    <Property Name="player_order" Type="int" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>

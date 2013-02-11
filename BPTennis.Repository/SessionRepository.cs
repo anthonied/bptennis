@@ -49,12 +49,14 @@ namespace BPTennis.Repository
             }
             
         }
+
         private List<Player> GetActivePlayersForSession(int sessionId)
         {
             using (var model = new bp_tennisEntities())
             {
                 var activePlayers = (from sp in model.session_players
                                     where sp.session_id == sessionId
+                                    orderby sp.player_order ascending
                                     select new Player
                                     {
                                         Id = sp.player.id,
@@ -79,7 +81,11 @@ namespace BPTennis.Repository
         {
             using (var model = new bp_tennisEntities())
             {
-                var session = new BPTennis.Data.session_players { player_id = playerId, session_id = sessionId };
+                var lastPlayerOrder = (from sp in model.session_players
+                                       orderby sp.player_order descending
+                                       select sp).First();
+
+                var session = new BPTennis.Data.session_players { player_id = playerId, session_id = sessionId, player_order = lastPlayerOrder.player_order + 1};
                 model.session_players.Add(session);
                 model.SaveChanges();
             }
@@ -256,6 +262,16 @@ namespace BPTennis.Repository
             }
         }
 
+        public void GainPosition(int playerId)
+        {
+            using (var model = new bp_tennisEntities())
+            {
+                var player = (from sp in model.session_players
+                                  where sp.player_id == playerId
+                                  select sp).FirstOrDefault();
 
+                player.player_order++;
+            }   
+        }
     }
 }
