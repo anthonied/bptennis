@@ -9,3 +9,4 @@ C:\Development\Projects\BPTennis\BPTennis.Domain\bin\Debug\BPTennis.Domain.dll
 C:\Development\Projects\BPTennis\BPTennis.Domain\bin\Debug\BPTennis.Domain.pdb
 C:\Development\Projects\BPTennis\BPTennis.Domain\obj\Debug\BPTennis.Domain.dll
 C:\Development\Projects\BPTennis\BPTennis.Domain\obj\Debug\BPTennis.Domain.pdb
+C:\Development\Projects\BPTennis\BPTennis.Domain\obj\Debug\BPTennis.Domain.csprojResolveAssemblyReference.cache

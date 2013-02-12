@@ -11,8 +11,6 @@ namespace BPTennis.Repository
 {
     public class SessionRepository:ICourt, IPlayer
     {
-
-
         public Session GetTodaySession()
         {            
             using (var model = new bp_tennisEntities())
@@ -311,6 +309,29 @@ namespace BPTennis.Repository
                                       where sp.session_id == sessionId && sp.player_id == playerId
                                       select sp.player_order).FirstOrDefault();
                 return playerPosition;
+            }
+        }
+
+        public int GetTopPlayer(int sessionId)
+        {
+            using (var model = new bp_tennisEntities())
+            {
+                var topPlayer = (from sp in model.session_players
+                                 where sp.session_id == sessionId
+                                 select sp.player_order).First();
+                return topPlayer;
+            }
+        }
+
+        public int GetLastPlayer(int sessionId)
+        {
+            using (var model = new bp_tennisEntities())
+            {
+                var lastPlayer = (from sp in model.session_players
+                                  where sp.session_id == sessionId
+                                  orderby sp.player_order descending
+                                  select sp.player_order).First();
+                return lastPlayer;
             }
         }
     }

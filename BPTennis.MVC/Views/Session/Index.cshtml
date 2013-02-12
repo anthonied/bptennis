@@ -18,8 +18,8 @@
             document.getElementById(clickedButton.id).style.backgroundColor = selectedBackColor;
             selectedPlayers += playerId + "|";
             selectedPlayer = playerId;
-            playerPosition = document.location.href = "Session/GetPlayerPosition?sessionId=@Model.Id&playerId=" + playerId;
-            alert(playerPosition);
+            //document.location.href = "Session/GetPlayerPosition?sessionId=@Model.Id&playerId=" + playerId;
+            //alert(playerPosition);
         }
         else {
             document.getElementById(clickedButton.id).style.backgroundColor = originalBackColor;

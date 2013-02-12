@@ -46,13 +46,19 @@ namespace BPTennis.MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        public int GetPlayerPosition(int sessionId, string playerId)
+        public ActionResult GetPlayerPosition(int sessionId, string playerId)
         {
             var sessionRepository = new SessionRepository();
+            var sessionModel = new SessionModel();
 
             var playerPosition = sessionRepository.GetPlayerPositionByPlayerId(sessionId, int.Parse(playerId.Replace("|", "")));
+            var topPlayer = sessionRepository.GetTopPlayer(sessionId);
+            var lastPlayer = sessionRepository.GetLastPlayer(sessionId);
+            
+            sessionModel.TopPlayerOrder = topPlayer;
+            sessionModel.LastPlayerOrder = lastPlayer;
 
-            return playerPosition;
+            return RedirectToAction("Index");
         }
         //
         // GET: /Session/Details/5
