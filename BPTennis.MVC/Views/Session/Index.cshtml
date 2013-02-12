@@ -6,6 +6,8 @@
 
 <script type="text/javascript">
     var selectedPlayers = "";
+    var selectedPlayer = "";
+    var playerPosition = "";
     var originalBackColor = "#D3DCE0";
     var selectedBackColor = "lightgreen";
 
@@ -15,18 +17,27 @@
         if (document.getElementById(clickedButton.id).style.backgroundColor == "" || document.getElementById(clickedButton.id).style.backgroundColor != selectedBackColor) {
             document.getElementById(clickedButton.id).style.backgroundColor = selectedBackColor;
             selectedPlayers += playerId + "|";
+            selectedPlayer = playerId;
+            playerPosition = document.location.href = "Session/GetPlayerPosition?sessionId=@Model.Id&playerId=" + playerId;
+            alert(playerPosition);
         }
         else {
             document.getElementById(clickedButton.id).style.backgroundColor = originalBackColor;
             selectedPlayers = selectedPlayers.replace('|' + playerId + '|', '|');
+            selectedPlayer = selectedPlayer.replace(playerId, '');
         }
-        
     }
 
     function playerPositionUp() {
-        var playerId = selectedPlayers;
+        var playerId = selectedPlayer;
 
         document.location.href = "Session/GainPlayerPosition?sessionId=@Model.Id&playerId=" + playerId;
+    }
+
+    function playerPositionDown() {
+        var playerId = selectedPlayer;
+
+        document.location.href = "Session/DropPlayerPosition?sessionId=@Model.Id&playerId=" + playerId;
     }
 
     function courtClick(courtId) {
@@ -36,7 +47,7 @@
         if (numberOfSelectedPlayers == 4)
             document.location.href = "Session/AddPlayerToCourt?sessionId=@Model.Id&courtId=" + courtId + "&courtPlayers=" + selectedPlayers;
         else {
-            alert("Please select 4 players!");          
+            alert("Please select 4 players!");      
         }
     }
 
@@ -65,7 +76,7 @@
                        <input type="button" value="Move Player Up" onclick="playerPositionUp()" />
                    </td>
                    <td>
-                       <input type="button" value="Move Player Down" onclick="playerPosition()" />
+                       <input type="button" value="Move Player Down" onclick="playerPositionDown()" />
                    </td>
                 </tr>
             @foreach (var item in Model.Pool.Players) {
@@ -116,11 +127,8 @@
                 }
             </table>
         </td>
-
     </tr>
-
 </table>
-
 <p>
     @Html.ActionLink("Add Player", "AddActive", new { sessionId = Model.Id })
 </p>

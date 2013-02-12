@@ -28,13 +28,31 @@ namespace BPTennis.MVC.Controllers
             return View(session);
         }
 
-        public ActionResult GainPlayerPosition(int sessionId, int playerId)
+        public ActionResult GainPlayerPosition(int sessionId, string playerId)
         {
             var sessionRepository = new SessionRepository();
 
-            sessionRepository.GainPosition(playerId);
+            sessionRepository.GainPosition(int.Parse(playerId.Replace("|", "")), sessionId);
 
-            return View("Index");
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult DropPlayerPosition(int sessionId, string playerId)
+        {
+            var sessionRepository = new SessionRepository();
+
+            sessionRepository.DropPlayerPosition(int.Parse(playerId.Replace("|", "")), sessionId);
+
+            return RedirectToAction("Index");
+        }
+
+        public int GetPlayerPosition(int sessionId, string playerId)
+        {
+            var sessionRepository = new SessionRepository();
+
+            var playerPosition = sessionRepository.GetPlayerPositionByPlayerId(sessionId, int.Parse(playerId.Replace("|", "")));
+
+            return playerPosition;
         }
         //
         // GET: /Session/Details/5

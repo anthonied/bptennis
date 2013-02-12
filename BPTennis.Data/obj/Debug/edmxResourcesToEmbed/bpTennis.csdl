@@ -83,7 +83,7 @@
     <Property Name="player_id" Type="Int32" Nullable="false" />
     <NavigationProperty Name="player" Relationship="bp_tennisModel.FK_session_players_player" FromRole="session_players" ToRole="player" />
     <NavigationProperty Name="session" Relationship="bp_tennisModel.FK_session_players_session" FromRole="session_players" ToRole="session" />
-    <Property Type="Int32" Name="player_order" />
+    <Property Type="Int32" Name="player_order" Nullable="false" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace BPTennis.Repository
 {
@@ -56,7 +57,7 @@ namespace BPTennis.Repository
             {
                 var activePlayers = (from sp in model.session_players
                                     where sp.session_id == sessionId
-                                    orderby sp.player_order ascending
+                                    orderby sp.player_order
                                     select new Player
                                     {
                                         Id = sp.player.id,
@@ -262,16 +263,55 @@ namespace BPTennis.Repository
             }
         }
 
-        public void GainPosition(int playerId)
+        public void GainPosition(int playerId, int sessionId)
         {
             using (var model = new bp_tennisEntities())
             {
-                var player = (from sp in model.session_players
-                                  where sp.player_id == playerId
-                                  select sp).FirstOrDefault();
+                var sessionPlayerToChange = (from sp in model.session_players
+                                  where sp.player_id == playerId && sp.session_id == sessionId
+                                  select sp).FirstOrDefault();                
 
-                player.player_order++;
+                var sessionPlayerToSwapWith = (from sp in model.session_players
+                                               where sp.player_order < sessionPlayerToChange.player_order && sp.session_id == sessionId
+                                               orderby sp.player_order descending
+                                               select sp).First();
+
+                int swapOrder = sessionPlayerToSwapWith.player_order;
+
+                sessionPlayerToSwapWith.player_order = sessionPlayerToChange.player_order;
+                sessionPlayerToChange.player_order = swapOrder;
+                model.SaveChanges();
             }   
+        }
+        public void DropPlayerPosition(int playerId, int sessionId)
+        {
+            using (var model = new bp_tennisEntities())
+            {
+                var sessionPlayerToChange = (from sp in model.session_players
+                                             where sp.player_id == playerId && sp.session_id == sessionId
+                                             select sp).FirstOrDefault();
+
+                var sessionPlayerToSwapWith = (from sp in model.session_players
+                                               where sp.player_order > sessionPlayerToChange.player_order && sp.session_id == sessionId
+                                               orderby sp.player_order ascending
+                                               select sp).First();
+
+                int swapOrder = sessionPlayerToSwapWith.player_order;
+
+                sessionPlayerToSwapWith.player_order = sessionPlayerToChange.player_order;
+                sessionPlayerToChange.player_order = swapOrder;
+                model.SaveChanges();
+            }
+        }
+        public int GetPlayerPositionByPlayerId(int sessionId, int playerId)
+        {
+            using (var model = new bp_tennisEntities())
+            {
+                var playerPosition = (from sp in model.session_players
+                                      where sp.session_id == sessionId && sp.player_id == playerId
+                                      select sp.player_order).FirstOrDefault();
+                return playerPosition;
+            }
         }
     }
 }

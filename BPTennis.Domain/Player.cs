@@ -16,6 +16,7 @@ namespace BPTennis.Domain
         public string Email { get; set; }
         public bool AvailableToPlay { get; set; }
         public string Status { get; set; }
+        public int? PlayerOrder { get; set; }
         public string DisplayName
         {
             get
