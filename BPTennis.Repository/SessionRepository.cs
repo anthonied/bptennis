@@ -217,10 +217,10 @@ namespace BPTennis.Repository
         {
             using (var model = new bp_tennisEntities())
             {
-                courtPlayers.ForEach(player => model.session_players.Add(new session_players { player_id = player.Id, session_id = sessionId }));
+                int playerOrder = 1;
+                courtPlayers.ForEach(player => model.session_players.Add(new session_players { player_id = player.Id, session_id = sessionId, player_order = playerOrder++ }));
                 model.SaveChanges();
-            }
-            
+            }            
         }
 
         public void CancelCurrentGame(int courtId)
