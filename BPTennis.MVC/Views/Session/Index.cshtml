@@ -28,15 +28,13 @@
         }
     }
 
-    function playerPositionUp() {
-        var playerId = selectedPlayer;
-
+    function playerPositionUp(clickedButton) {
+        var playerId = clickedButton.id.toString().replace('button', '');
         document.location.href = "Session/GainPlayerPosition?sessionId=@Model.Id&playerId=" + playerId;
     }
 
-    function playerPositionDown() {
-        var playerId = selectedPlayer;
-
+    function playerPositionDown(clickedButton) {
+        var playerId = clickedButton.id.toString().replace('button', '');
         document.location.href = "Session/DropPlayerPosition?sessionId=@Model.Id&playerId=" + playerId;
     }
 
@@ -71,18 +69,12 @@
     <tr>
         <td>
             <table>
-               <tr>
-                   <td>
-                       <input type="button" value="Move Player Up" onclick="playerPositionUp()" />
-                   </td>
-                   <td>
-                       <input type="button" value="Move Player Down" onclick="playerPositionDown()" />
-                   </td>
-                </tr>
             @foreach (var item in Model.Pool.Players) {
                 <tr>
                    <th><input id="@string.Format("button{0}",item.Id)" type="button" value="@item.DisplayName" onclick="ChangeColour(this)" style="width:250px" /></th>
-                   <th><input id="@string.Format("button{0}",item.Id)" type="button" value="X" onclick="PlayerGoHome(this)" style="width:20px;" /></th>
+                   <th><input id="@string.Format("button{0}",item.Id)" type="button" value="Up" onclick="playerPositionUp(this)" /></th>
+                   <th><input id="@string.Format("button{0}",item.Id)" type="button" value="Down" onclick="playerPositionDown(this);" style="width:60px;"/></th>
+                   <th><input id="@string.Format("button{0}",item.Id)" type="button" value="X" onclick="PlayerGoHome(this)" style="width:25px;" /></th>
                </tr>                 
             }
            </table>

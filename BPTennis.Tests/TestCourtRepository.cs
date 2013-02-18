@@ -11,11 +11,11 @@ namespace BPTennis.Tests
     {
         public void AddPlayersToSessionActivePlayers(int id, List<Player> players)
         {
-            throw new NotImplementedException();
+
         }
         public void CancelCurrentGame(int id)
         {
-            throw new NotImplementedException();
+        
         }
         public void RemovePlayersFromCourt(int courtId)
         {

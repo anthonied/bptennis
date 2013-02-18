@@ -11,7 +11,13 @@ namespace BPTennis.Domain
         public List<Player> ActivePlayers { get; set; }
         public DateTime Date { get; set; }
         public List<Court> Courts { get; set; }
-
+        public Player CurrentTopPlayer {
+            get
+            {
+                return (from ap in ActivePlayers
+                        select ap).OrderBy(item => item.PlayerOrder).FirstOrDefault();
+            }
+        }
         public Session()
         {
             ActivePlayers = new List<Player>();

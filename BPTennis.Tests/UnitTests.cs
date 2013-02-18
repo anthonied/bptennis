@@ -12,23 +12,23 @@ namespace BPTennis.Tests
     class UnitTests
     {
         private Player _player;
-        private Pool _onePlayerPool;        
+        private Pool _onePlayerPool;
         private IPlayer _testPlayerRepository = new TestPlayerRepository();
-     
-        
+
+
         [SetUp]
         public void Given()
         {
             _onePlayerPool = new Pool();
-            _player = _getChrisThePlayer();   
+            _player = _getChrisThePlayer();
             _onePlayerPool.Players.Add(_player);
-            
+
         }
-       
+
         [Test]
         public void CanCreateCourt()
         {
-            var ourCourt =  new Court()
+            var ourCourt = new Court()
             {
                 CourtName = "A1"
             };
@@ -162,7 +162,7 @@ namespace BPTennis.Tests
 
             absentPlayer.AddToPool(_onePlayerPool);
 
-            Assert.That(_onePlayerPool.Players.Count, Is.EqualTo(1));                      
+            Assert.That(_onePlayerPool.Players.Count, Is.EqualTo(1));
         }
 
         [Test]
@@ -175,12 +175,13 @@ namespace BPTennis.Tests
                 new Player { Id = 3, Name = "Hernus" },
                 new Player { Id = 13, Name = "Drilene" }};
 
-            var courtPlayer = new Player() { Id = 13, Name = "Drilene" };
+            var courtPlayer = new Player() { Id = 13, Name = "Drilene", Repository = _testPlayerRepository };
             var ourCourt = new Court
             {
                 CourtName = "A1"
             };
             ourCourt.Repository = new TestCourtRepository();
+
             courtPlayer.SendToCourt(ourCourt, session);
 
             ourCourt.FinishGame(session.Id);
@@ -193,11 +194,11 @@ namespace BPTennis.Tests
         {
             var session = new Session();
             session.ActivePlayers = new List<Player> { 
-                new Player { Id = 1, Name = "Christopher" },
-                new Player { Id = 2, Name = "Gerbrand" },
-                new Player { Id = 3, Name = "Hernus" },
-                new Player { Id = 4, Name = "Filamon" }};
-            var court = new Court{Id =1};
+                new Player { Id = 1, Name = "Christopher",Repository = _testPlayerRepository },
+                new Player { Id = 2, Name = "Gerbrand" ,Repository = _testPlayerRepository},
+                new Player { Id = 3, Name = "Hernus" ,Repository = _testPlayerRepository},
+                new Player { Id = 4, Name = "Filamon" ,Repository = _testPlayerRepository}};
+            var court = new Court { Id = 1 };
 
             session.ActivePlayers[2].SendToCourt(court, session);
 
@@ -209,27 +210,68 @@ namespace BPTennis.Tests
         {
             var session = new Session();
             session.ActivePlayers = new List<Player> {
-                new Player { Id = 1, Name = "Christopher" }, 
-                new Player { Id = 2, Name = "Gerbrand" },
-                new Player { Id = 3, Name = "Hernus" },
-                new Player { Id = 4, Name = "Filamon" }};
+                new Player { Id = 1, Name = "Christopher",Repository = _testPlayerRepository }, 
+                new Player { Id = 2, Name = "Gerbrand",Repository = _testPlayerRepository },
+                new Player { Id = 3, Name = "Hernus",Repository = _testPlayerRepository },
+                new Player { Id = 4, Name = "Filamon",Repository = _testPlayerRepository }};
 
             var court = new Court { Id = 1, CourtName = "A1" };
 
             int index = 0;
-            foreach (var player in session.ActivePlayers)
-            {
-                session.ActivePlayers[index].SendToCourt(court, session);
-                index++;
-            }
-            court.CancelGame(session.Id, court.Id);
-            Assert.That(court.Players, Is.False);          
+            //foreach (var player in session.ActivePlayers)
+            //{
+            //    session.ActivePlayers[index].SendToCourt(court, session);
+            //    index++;
+            //}
+
+          //  court.CancelGame(session.Id, court.Id);
+            Assert.That(court.Players, Is.False);
 
         }
-       
+
+        [Test]
+        public void CurrentTopPlayerIsOneWithLowestPlayerOrder()
+        {
+            var session = new Session();
+            session.ActivePlayers = new List<Player> {
+                new Player { Id = 1, Name = "Christopher", PlayerOrder = 10 },
+                new Player { Id = 2, Name = "Drilene", PlayerOrder = 7 },
+                new Player { Id = 3, Name = "Hernus", PlayerOrder = 8 },
+                new Player { Id = 4, Name = "Von-Marie", PlayerOrder = 9 },
+                new Player { Id = 5, Name = "Morne", PlayerOrder = 11 }};
+
+            Assert.That(session.CurrentTopPlayer, Is.EqualTo(session.ActivePlayers[1]));
+        }
+
+        [Test]
+        public void NextPlayerIsCurrentTopPlayerWhenOthersAreSendToCourt()
+        {
+            var session = new Session();
+            session.ActivePlayers = new List<Player> {
+                new Player { Id = 1, Name = "Christopher", PlayerOrder = 10,Repository = _testPlayerRepository },
+                new Player { Id = 2, Name = "Drilene", PlayerOrder = 7,Repository = _testPlayerRepository },
+                new Player { Id = 3, Name = "Hernus", PlayerOrder = 8,Repository = _testPlayerRepository },
+                new Player { Id = 4, Name = "Von-Marie", PlayerOrder = 9,Repository = _testPlayerRepository },
+                new Player { Id = 5, Name = "Morne", PlayerOrder = 12,Repository = _testPlayerRepository },
+                new Player { Id = 6, Name = "Hernus", PlayerOrder = 13,Repository = _testPlayerRepository },
+                new Player { Id = 7, Name = "Jan", PlayerOrder = 15,Repository = _testPlayerRepository },
+                new Player { Id = 8, Name = "Sollie", PlayerOrder = 11,Repository = _testPlayerRepository }};
+
+                var court = new Court { Id = 1, CourtName = "A" };         
+                
+
+                session.ActivePlayers[0].SendToCourt(court, session);
+                session.ActivePlayers[0].SendToCourt(court, session);
+                session.ActivePlayers[0].SendToCourt(court, session);
+                session.ActivePlayers[0].SendToCourt(court, session);
+
+
+            Assert.That(session.CurrentTopPlayer, Is.EqualTo(session.ActivePlayers.Find(x => x.Id == 8)));
+        }
+
         private Player _getChrisThePlayer()
         {
-          
+
             var player = new Player()
             {
                 Id = 29,

@@ -80,13 +80,22 @@ namespace BPTennis.Repository
         {
             using (var model = new bp_tennisEntities())
             {
-                var lastPlayerOrder = (from sp in model.session_players
-                                       orderby sp.player_order descending
-                                       select sp).First();
+                if (model.session_players.Count() == 0)
+                {
+                    var session = new BPTennis.Data.session_players { player_id = playerId, session_id = sessionId, player_order = 1 };
+                    model.session_players.Add(session);
+                    model.SaveChanges();
+                }
+                else
+                {
+                    var lastPlayerOrder = (from sp in model.session_players
+                                           orderby sp.player_order descending
+                                           select sp).First();
 
-                var session = new BPTennis.Data.session_players { player_id = playerId, session_id = sessionId, player_order = lastPlayerOrder.player_order + 1};
-                model.session_players.Add(session);
-                model.SaveChanges();
+                    var session = new BPTennis.Data.session_players { player_id = playerId, session_id = sessionId, player_order = lastPlayerOrder.player_order + 1 };
+                    model.session_players.Add(session);
+                    model.SaveChanges();
+                }
             }
         }
 
