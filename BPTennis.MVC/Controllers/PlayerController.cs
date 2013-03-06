@@ -20,8 +20,8 @@ namespace BPTennis.MVC.Controllers
 
             var playerRepository = new PlayerRepository();
 
-            var domainPlayers = playerRepository.GetAllPlayers();
-
+           // var domainPlayers = playerRepository.GetAllPlayers();
+            var domainPlayers = new List<Player>();
             domainPlayers.ForEach(domainPlayer => players.Add(new PlayerModel { Id = domainPlayer.Id,
                     Name = domainPlayer.Name,
                     Surname = domainPlayer.Surname,
@@ -58,9 +58,9 @@ namespace BPTennis.MVC.Controllers
         {
             try
             {
-                var playerRepository = new PlayerRepository();
-                playerRepository.CreatePlayer(new Player { Name = newModelPlayer.Name, Surname = newModelPlayer.Surname, Gender = newModelPlayer.Gender.ToString(),
-                                                            Telephone = newModelPlayer.Telephone, Email = newModelPlayer.Email, Status = "Active"});
+            //    var playerRepository = new PlayerRepository();
+            //    playerRepository.CreatePlayer(new Player { Name = newModelPlayer.Name, Surname = newModelPlayer.Surname, Gender = newModelPlayer.Gender.ToString(),
+             //                                               Telephone = newModelPlayer.Telephone, Email = newModelPlayer.Email, Status = "Active"});
                 return RedirectToAction("Index");
             }
             catch
