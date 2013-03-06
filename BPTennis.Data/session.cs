@@ -17,7 +17,7 @@ namespace BPTennis.Data
         public session()
         {
             this.session_court_player = new HashSet<session_court_player>();
-            this.session_players = new HashSet<session_players>();
+            this.session_player = new HashSet<session_player>();
         }
     
         public int id { get; set; }
@@ -25,6 +25,6 @@ namespace BPTennis.Data
         public string courts { get; set; }
     
         public virtual ICollection<session_court_player> session_court_player { get; set; }
-        public virtual ICollection<session_players> session_players { get; set; }
+        public virtual ICollection<session_player> session_player { get; set; }
     }
 }

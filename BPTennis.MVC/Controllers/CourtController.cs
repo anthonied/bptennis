@@ -58,7 +58,7 @@ namespace BPTennis.MVC.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch(Exception ex)
             {
                 return View();
             }

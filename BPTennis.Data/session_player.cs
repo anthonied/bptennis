@@ -12,7 +12,7 @@ namespace BPTennis.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class session_players
+    public partial class session_player
     {
         public int id { get; set; }
         public int session_id { get; set; }

@@ -13,10 +13,10 @@ namespace BPTennis.Data
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class bp_tennisEntities : DbContext
+    public partial class bp_tennis_ceEntities : DbContext
     {
-        public bp_tennisEntities()
-            : base("name=bp_tennisEntities")
+        public bp_tennis_ceEntities()
+            : base("name=bp_tennis_ceEntities")
         {
         }
     
@@ -25,12 +25,5 @@ namespace BPTennis.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<court> courts { get; set; }
-        public DbSet<player> players { get; set; }
-        public DbSet<session> sessions { get; set; }
-        public DbSet<session_court_player> session_court_player { get; set; }
-        public DbSet<session_players> session_players { get; set; }
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
-        public DbSet<comments> comments1 { get; set; }
     }
 }

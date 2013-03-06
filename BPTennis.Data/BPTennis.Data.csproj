@@ -11,6 +11,21 @@
     <AssemblyName>BPTennis.Data</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,67 +61,124 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="bpTennis.Context.cs">
+    <Compile Include="bp_tennis.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>bpTennis.Context.tt</DependentUpon>
+      <DependentUpon>bp_tennis.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="bpTennis.cs">
+    <Compile Include="bp_tennis.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>bpTennis.tt</DependentUpon>
+      <DependentUpon>bp_tennis.tt</DependentUpon>
     </Compile>
-    <Compile Include="bpTennis.Designer.cs">
+    <Compile Include="bp_tennis.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>bpTennis.edmx</DependentUpon>
+      <DependentUpon>bp_tennis.edmx</DependentUpon>
     </Compile>
-    <Compile Include="comments.cs">
-      <DependentUpon>bpTennis.tt</DependentUpon>
+    <Compile Include="comments1.cs">
+      <DependentUpon>bp_tennis.tt</DependentUpon>
     </Compile>
     <Compile Include="court.cs">
-      <DependentUpon>bpTennis.tt</DependentUpon>
+      <DependentUpon>bp_tennis.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="player.cs">
-      <DependentUpon>bpTennis.tt</DependentUpon>
+      <DependentUpon>bp_tennis.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="session.cs">
-      <DependentUpon>bpTennis.tt</DependentUpon>
+      <DependentUpon>bp_tennis.tt</DependentUpon>
     </Compile>
     <Compile Include="session_court_player.cs">
-      <DependentUpon>bpTennis.tt</DependentUpon>
+      <DependentUpon>bp_tennis.tt</DependentUpon>
     </Compile>
-    <Compile Include="session_players.cs">
-      <DependentUpon>bpTennis.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>bpTennis.tt</DependentUpon>
+    <Compile Include="session_player.cs">
+      <DependentUpon>bp_tennis.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="bpTennis.edmx">
+    <EntityDeploy Include="bp_tennis.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>bpTennis.Designer.cs</LastGenOutput>
+      <LastGenOutput>bp_tennis.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="bpTennis.Context.tt">
+    <None Include="bp_tennis.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>bpTennis.edmx</DependentUpon>
-      <LastGenOutput>bpTennis.Context.cs</LastGenOutput>
+      <DependentUpon>bp_tennis.edmx</DependentUpon>
+      <LastGenOutput>bp_tennis.Context.cs</LastGenOutput>
     </None>
-    <None Include="bpTennis.edmx.diagram">
-      <DependentUpon>bpTennis.edmx</DependentUpon>
+    <None Include="bp_tennis.edmx.diagram">
+      <DependentUpon>bp_tennis.edmx</DependentUpon>
     </None>
-    <None Include="bpTennis.tt">
+    <None Include="bp_tennis.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>bpTennis.edmx</DependentUpon>
-      <LastGenOutput>bpTennis.cs</LastGenOutput>
+      <DependentUpon>bp_tennis.edmx</DependentUpon>
+      <LastGenOutput>bp_tennis.cs</LastGenOutput>
+    </None>
+    <EntityDeploy Include="Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </None>
+    <None Include="Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </None>
+    <None Include="Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+      <DependentUpon>Model1.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bpTennis.edmx.sql" />
+    <Content Include="bp_tennis_ce.sdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.SQL.Server.Compact.4.0">
+      <Visible>False</Visible>
+      <ProductName>SQL Server Compact 4.0 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
