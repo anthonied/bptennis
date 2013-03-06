@@ -12,17 +12,17 @@ namespace BPTennis.Repository
     {
         public void AddComment(string name, string comment)
         {
-            using (var model = new bp_tennisEntities())
-            {
-                BPTennis.Data.comments dbComment = new comments()
-                {
-                    name = name,
-                    comment = comment
-                };
+            ////using (var model = new bp_tennisEntities())
+            ////{
+            ////    BPTennis.Data.comments dbComment = new comments()
+            ////    {
+            ////        name = name,
+            ////        comment = comment
+            ////    };
 
-                model.comments1.Add(dbComment);
-                model.SaveChanges();
-            }
+            ////    model.comments1.Add(dbComment);
+            ////    model.SaveChanges();
+            ////}
         }
         public List<Comments> GetAllComments()
         {

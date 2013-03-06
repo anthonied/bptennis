@@ -129,7 +129,7 @@ namespace BPTennis.Repository
         {
             using (var model = new bp_tennisEntities())
             {
-                var playerIdsAllreadyChosen = from sp in model.session_players
+                var playerIdsAllreadyChosen = from sp in model.session_player
                                               where sp.session_id == sessionId
                                               select sp.player_id;
 

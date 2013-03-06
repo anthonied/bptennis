@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="bp_tennisModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="bp_tennisModelStoreContainer">
+    <EntitySet Name="comments1" EntityType="bp_tennisModel.Store.comments1" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="court" EntityType="bp_tennisModel.Store.court" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="player" EntityType="bp_tennisModel.Store.player" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="session" EntityType="bp_tennisModel.Store.session" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="session_court_player" EntityType="bp_tennisModel.Store.session_court_player" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="session_player" EntityType="bp_tennisModel.Store.session_player" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <AssociationSet Name="FK_session_court_player_court" Association="bp_tennisModel.Store.FK_session_court_player_court">
+      <End Role="court" EntitySet="court" />
+      <End Role="session_court_player" EntitySet="session_court_player" />
+    </AssociationSet>
+    <AssociationSet Name="FK_session_court_player_player" Association="bp_tennisModel.Store.FK_session_court_player_player">
+      <End Role="player" EntitySet="player" />
+      <End Role="session_court_player" EntitySet="session_court_player" />
+    </AssociationSet>
+    <AssociationSet Name="FK_session_court_player_session" Association="bp_tennisModel.Store.FK_session_court_player_session">
+      <End Role="session" EntitySet="session" />
+      <End Role="session_court_player" EntitySet="session_court_player" />
+    </AssociationSet>
+    <AssociationSet Name="FK_session_players_player" Association="bp_tennisModel.Store.FK_session_players_player">
+      <End Role="player" EntitySet="player" />
+      <End Role="session_player" EntitySet="session_player" />
+    </AssociationSet>
+    <AssociationSet Name="FK_session_players_session" Association="bp_tennisModel.Store.FK_session_players_session">
+      <End Role="session" EntitySet="session" />
+      <End Role="session_player" EntitySet="session_player" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="comments1">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="comment" Type="varchar" Nullable="false" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="court">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="player">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="nchar" MaxLength="20" />
+    <Property Name="surname" Type="nchar" MaxLength="30" />
+    <Property Name="gender" Type="nchar" MaxLength="10" />
+    <Property Name="telephone" Type="nchar" MaxLength="15" />
+    <Property Name="email" Type="nchar" MaxLength="30" />
+    <Property Name="status" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="session">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="date" Type="datetime" Nullable="false" />
+    <Property Name="courts" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="session_court_player">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="session_id" Type="int" Nullable="false" />
+    <Property Name="court_id" Type="int" Nullable="false" />
+    <Property Name="player_id" Type="int" Nullable="false" />
+    <Property Name="in_progress" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="session_player">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="session_id" Type="int" Nullable="false" />
+    <Property Name="player_id" Type="int" Nullable="false" />
+    <Property Name="player_order" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_session_court_player_court">
+    <End Role="court" Type="bp_tennisModel.Store.court" Multiplicity="1" />
+    <End Role="session_court_player" Type="bp_tennisModel.Store.session_court_player" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="court">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="session_court_player">
+        <PropertyRef Name="court_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_session_court_player_player">
+    <End Role="player" Type="bp_tennisModel.Store.player" Multiplicity="1" />
+    <End Role="session_court_player" Type="bp_tennisModel.Store.session_court_player" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="player">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="session_court_player">
+        <PropertyRef Name="player_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_session_court_player_session">
+    <End Role="session" Type="bp_tennisModel.Store.session" Multiplicity="1" />
+    <End Role="session_court_player" Type="bp_tennisModel.Store.session_court_player" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="session">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="session_court_player">
+        <PropertyRef Name="session_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_session_players_player">
+    <End Role="player" Type="bp_tennisModel.Store.player" Multiplicity="1" />
+    <End Role="session_player" Type="bp_tennisModel.Store.session_player" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="player">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="session_player">
+        <PropertyRef Name="player_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_session_players_session">
+    <End Role="session" Type="bp_tennisModel.Store.session" Multiplicity="1" />
+    <End Role="session_player" Type="bp_tennisModel.Store.session_player" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="session">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="session_player">
+        <PropertyRef Name="session_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

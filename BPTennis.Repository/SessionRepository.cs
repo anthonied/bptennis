@@ -53,7 +53,7 @@ namespace BPTennis.Repository
         {
             using (var model = new bp_tennisEntities())
             {
-                var activePlayers = (from sp in model.session_players
+                var activePlayers = (from sp in model.session_player
                                     where sp.session_id == sessionId
                                     orderby sp.player_order
                                     select new Player
@@ -80,20 +80,20 @@ namespace BPTennis.Repository
         {
             using (var model = new bp_tennisEntities())
             {
-                if (model.session_players.Count() == 0)
+                if (model.session_player.Count() == 0)
                 {
-                    var session = new BPTennis.Data.session_players { player_id = playerId, session_id = sessionId, player_order = 1 };
-                    model.session_players.Add(session);
+                    var session = new BPTennis.Data.session_player { player_id = playerId, session_id = sessionId, player_order = 1 };
+                    model.session_player.Add(session);
                     model.SaveChanges();
                 }
                 else
                 {
-                    var lastPlayerOrder = (from sp in model.session_players
+                    var lastPlayerOrder = (from sp in model.session_player
                                            orderby sp.player_order descending
                                            select sp).First();
 
-                    var session = new BPTennis.Data.session_players { player_id = playerId, session_id = sessionId, player_order = lastPlayerOrder.player_order + 1 };
-                    model.session_players.Add(session);
+                    var session = new BPTennis.Data.session_player { player_id = playerId, session_id = sessionId, player_order = lastPlayerOrder.player_order + 1 };
+                    model.session_player.Add(session);
                     model.SaveChanges();
                 }
             }
@@ -204,11 +204,11 @@ namespace BPTennis.Repository
         {
             using (var model = new bp_tennisEntities())
             {
-                var player = (from sp in model.session_players
+                var player = (from sp in model.session_player
                              where sp.player_id == playerId
                              select sp).FirstOrDefault();
 
-                model.session_players.Remove(player);
+                model.session_player.Remove(player);
                 model.SaveChanges();
             }
         }
@@ -218,7 +218,7 @@ namespace BPTennis.Repository
             using (var model = new bp_tennisEntities())
             {
                 int playerOrder = 1;
-                courtPlayers.ForEach(player => model.session_players.Add(new session_players { player_id = player.Id, session_id = sessionId, player_order = playerOrder++ }));
+                courtPlayers.ForEach(player => model.session_player.Add(new session_player { player_id = player.Id, session_id = sessionId, player_order = playerOrder++ }));
                 model.SaveChanges();
             }            
         }
@@ -274,11 +274,11 @@ namespace BPTennis.Repository
         {
             using (var model = new bp_tennisEntities())
             {
-                var sessionPlayerToChange = (from sp in model.session_players
+                var sessionPlayerToChange = (from sp in model.session_player
                                   where sp.player_id == playerId && sp.session_id == sessionId
-                                  select sp).FirstOrDefault();                
+                                  select sp).FirstOrDefault();
 
-                var sessionPlayerToSwapWith = (from sp in model.session_players
+                var sessionPlayerToSwapWith = (from sp in model.session_player
                                                where sp.player_order < sessionPlayerToChange.player_order && sp.session_id == sessionId
                                                orderby sp.player_order descending
                                                select sp).First();
@@ -294,11 +294,11 @@ namespace BPTennis.Repository
         {
             using (var model = new bp_tennisEntities())
             {
-                var sessionPlayerToChange = (from sp in model.session_players
+                var sessionPlayerToChange = (from sp in model.session_player
                                              where sp.player_id == playerId && sp.session_id == sessionId
                                              select sp).FirstOrDefault();
 
-                var sessionPlayerToSwapWith = (from sp in model.session_players
+                var sessionPlayerToSwapWith = (from sp in model.session_player
                                                where sp.player_order > sessionPlayerToChange.player_order && sp.session_id == sessionId
                                                orderby sp.player_order ascending
                                                select sp).First();
@@ -314,7 +314,7 @@ namespace BPTennis.Repository
         {
             using (var model = new bp_tennisEntities())
             {
-                var playerPosition = (from sp in model.session_players
+                var playerPosition = (from sp in model.session_player
                                       where sp.session_id == sessionId && sp.player_id == playerId
                                       select sp.player_order).FirstOrDefault();
                 return playerPosition;
@@ -325,7 +325,7 @@ namespace BPTennis.Repository
         {
             using (var model = new bp_tennisEntities())
             {
-                var topPlayer = (from sp in model.session_players
+                var topPlayer = (from sp in model.session_player
                                  where sp.session_id == sessionId
                                  select sp.player_order).First();
                 return topPlayer;
@@ -336,7 +336,7 @@ namespace BPTennis.Repository
         {
             using (var model = new bp_tennisEntities())
             {
-                var lastPlayer = (from sp in model.session_players
+                var lastPlayer = (from sp in model.session_player
                                   where sp.session_id == sessionId
                                   orderby sp.player_order descending
                                   select sp.player_order).First();

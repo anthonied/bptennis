@@ -10,3 +10,4 @@ C:\Development\Projects\BPTennis\BPTennis.Repository\bin\Debug\EntityFramework.x
 C:\Development\Projects\BPTennis\BPTennis.Repository\obj\Debug\BPTennis.Repository.csprojResolveAssemblyReference.cache
 C:\Development\Projects\BPTennis\BPTennis.Repository\obj\Debug\BPTennis.Repository.dll
 C:\Development\Projects\BPTennis\BPTennis.Repository\obj\Debug\BPTennis.Repository.pdb
+C:\Development\Projects\bptennis\BPTennis.Repository\bin\Debug\bp_tennis_ce.sdf

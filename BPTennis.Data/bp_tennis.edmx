@@ -1,17 +1,16 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+﻿<?xml version="1.0" encoding="utf-8"?><edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="bp_tennisModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="bp_tennisModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="bp_tennisModelStoreContainer">
-          <EntitySet Name="comments1" EntityType="bp_tennisModel.Store.comments1" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="court" EntityType="bp_tennisModel.Store.court" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="player" EntityType="bp_tennisModel.Store.player" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="session" EntityType="bp_tennisModel.Store.session" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="session_court_player" EntityType="bp_tennisModel.Store.session_court_player" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="session_player" EntityType="bp_tennisModel.Store.session_player" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="comments1" EntityType="bp_tennisModel.Store.comments1" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="court" EntityType="bp_tennisModel.Store.court" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="player" EntityType="bp_tennisModel.Store.player" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="session" EntityType="bp_tennisModel.Store.session" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="session_court_player" EntityType="bp_tennisModel.Store.session_court_player" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="session_player" EntityType="bp_tennisModel.Store.session_player" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
           <AssociationSet Name="FK_session_court_player_court" Association="bp_tennisModel.Store.FK_session_court_player_court">
             <End Role="court" EntitySet="court" />
             <End Role="session_court_player" EntitySet="session_court_player" />
@@ -151,7 +150,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="bp_tennisModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="bp_tennisModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
         <EntityContainer Name="bp_tennisEntities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="comments1" EntityType="bp_tennisModel.comments1" />
           <EntitySet Name="courts" EntityType="bp_tennisModel.court" />
@@ -308,7 +307,7 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="bp_tennisModelStoreContainer" CdmEntityContainer="bp_tennisEntities">
           <EntitySetMapping Name="comments1">
             <EntityTypeMapping TypeName="bp_tennisModel.comments1">
@@ -375,7 +374,7 @@
     </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
-  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <Connection>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
@@ -390,6 +389,6 @@
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams></Diagrams>
+    <Diagrams />
   </Designer>
 </edmx:Edmx>

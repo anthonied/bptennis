@@ -102,3 +102,7 @@ C:\Development\Projects\BPTennis\BPTennis.MVC\bin\BPTennis.Data.dll
 C:\Development\Projects\BPTennis\BPTennis.MVC\bin\BPTennis.Domain.pdb
 C:\Development\Projects\BPTennis\BPTennis.MVC\bin\BPTennis.Repository.pdb
 C:\Development\Projects\BPTennis\BPTennis.MVC\bin\BPTennis.Data.pdb
+C:\Development\Projects\bptennis\BPTennis.MVC\bin\System.Net.Http.dll
+C:\Development\Projects\bptennis\BPTennis.MVC\bin\System.Net.Http.WebRequest.dll
+C:\Development\Projects\bptennis\BPTennis.MVC\bin\System.Net.Http.xml
+C:\Development\Projects\bptennis\BPTennis.MVC\bin\System.Net.Http.WebRequest.xml

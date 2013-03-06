@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="bp_tennisModelStoreContainer" CdmEntityContainer="bp_tennisEntities">
+    <EntitySetMapping Name="comments1">
+      <EntityTypeMapping TypeName="bp_tennisModel.comments1">
+        <MappingFragment StoreEntitySet="comments1">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="comment" ColumnName="comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="courts">
+      <EntityTypeMapping TypeName="bp_tennisModel.court">
+        <MappingFragment StoreEntitySet="court">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="players">
+      <EntityTypeMapping TypeName="bp_tennisModel.player">
+        <MappingFragment StoreEntitySet="player">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="surname" ColumnName="surname" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="telephone" ColumnName="telephone" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sessions">
+      <EntityTypeMapping TypeName="bp_tennisModel.session">
+        <MappingFragment StoreEntitySet="session">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="courts" ColumnName="courts" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="session_court_player">
+      <EntityTypeMapping TypeName="bp_tennisModel.session_court_player">
+        <MappingFragment StoreEntitySet="session_court_player">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="session_id" ColumnName="session_id" />
+          <ScalarProperty Name="court_id" ColumnName="court_id" />
+          <ScalarProperty Name="player_id" ColumnName="player_id" />
+          <ScalarProperty Name="in_progress" ColumnName="in_progress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="session_player">
+      <EntityTypeMapping TypeName="bp_tennisModel.session_player">
+        <MappingFragment StoreEntitySet="session_player">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="session_id" ColumnName="session_id" />
+          <ScalarProperty Name="player_id" ColumnName="player_id" />
+          <ScalarProperty Name="player_order" ColumnName="player_order" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
